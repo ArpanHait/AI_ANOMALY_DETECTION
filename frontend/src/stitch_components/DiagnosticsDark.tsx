@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function DiagnosticsDark() {
@@ -69,17 +70,7 @@ export default function DiagnosticsDark() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -89,20 +80,20 @@ export default function DiagnosticsDark() {
 
 <nav className="hidden md:flex flex-col h-full py-6 bg-surface-container-low dark:bg-surface-container-low/40 backdrop-blur-xl docked left-0 h-screen w-64 border-r border-outline-variant/10 z-40">
 <div className="px-margin-desktop mb-8 flex items-center gap-4"><div className="flex flex-col gap-1"><h1 className="font-headline-md text-[28px] leading-none font-black text-primary-container tracking-tight">CORE<br/>INSIGHT</h1><p className="font-label-caps text-[10px] text-on-surface-variant/70 uppercase tracking-widest">V.4.0 ONLINE</p></div></div>
-<div className="flex-1 flex flex-col gap-2 px-2 overflow-y-auto scrollbar-hide"><a className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg" href="#"><span className="material-symbols-outlined">grid_view</span><span className="font-label-caps text-label-caps uppercase">Overview</span></a><a className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg" href="#"><span className="material-symbols-outlined">show_chart</span><span className="font-label-caps text-label-caps uppercase">Live Telemetry</span></a><a className="flex items-center gap-4 bg-[#00f0ff]/10 text-primary-container px-4 py-3 border-l-[3px] border-[#00f0ff] shadow-[inset_4px_0_15px_-4px_rgba(0,240,255,0.4)] transition-all duration-200 rounded-r-sm" href="#"><span className="material-symbols-outlined text-xl">query_stats</span><span className="font-label-caps text-label-caps uppercase">Diagnostics</span></a><a className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg" href="#"><span className="material-symbols-outlined">science</span><span className="font-label-caps text-label-caps uppercase">Simulation Lab</span></a><a className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg" href="#"><span className="material-symbols-outlined">build</span><span className="font-label-caps text-label-caps uppercase">Maintenance Hub</span></a></div>
+<div className="flex-1 flex flex-col gap-2 px-2 overflow-y-auto scrollbar-hide"><Link href="/dashboard" className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg"><span className="material-symbols-outlined">grid_view</span><span className="font-label-caps text-label-caps uppercase">Overview</span></Link><Link href="/telemetry" className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg"><span className="material-symbols-outlined">show_chart</span><span className="font-label-caps text-label-caps uppercase">Live Telemetry</span></Link><Link href="/diagnostics" className="flex items-center gap-4 bg-[#00f0ff]/10 text-primary-container px-4 py-3 border-l-[3px] border-[#00f0ff] shadow-[inset_4px_0_15px_-4px_rgba(0,240,255,0.4)] transition-all duration-200 rounded-r-sm"><span className="material-symbols-outlined text-xl">query_stats</span><span className="font-label-caps text-label-caps uppercase">Diagnostics</span></Link><Link href="/simulation-lab" className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg"><span className="material-symbols-outlined">science</span><span className="font-label-caps text-label-caps uppercase">Simulation Lab</span></Link><Link href="/maintenance-hub" className="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-70 hover:bg-primary-container/5 hover:opacity-100 transition-all duration-200 hover:translate-x-1 rounded-lg"><span className="material-symbols-outlined">build</span><span className="font-label-caps text-label-caps uppercase">Maintenance Hub</span></Link></div>
 <div className="mt-auto px-4 pt-6 border-t border-outline-variant/10 flex flex-col gap-4">
 <button className="w-full py-3 bg-[#00f0ff] text-black font-label-caps text-label-caps uppercase font-bold rounded-sm shadow-[0_0_20px_rgba(0,240,255,0.2)] hover:brightness-110 transition-all">
         Generate Report
     </button>
 <div className="flex flex-col gap-1">
-<a className="flex items-center gap-3 text-on-surface-variant/60 py-2 hover:text-on-surface transition-colors" href="#">
+<Link href="#" className="flex items-center gap-3 text-on-surface-variant/60 py-2 hover:text-on-surface transition-colors">
 <span className="material-symbols-outlined text-lg">terminal</span>
 <span className="font-label-caps text-label-caps uppercase text-[10px]">System Logs</span>
-</a>
-<a className="flex items-center gap-3 text-on-surface-variant/60 py-2 hover:text-on-surface transition-colors" href="#">
+</Link>
+<Link href="#" className="flex items-center gap-3 text-on-surface-variant/60 py-2 hover:text-on-surface transition-colors">
 <span className="material-symbols-outlined text-lg">settings</span>
 <span className="font-label-caps text-label-caps uppercase text-[10px]">Settings</span>
-</a>
+</Link>
 </div>
 <div className="flex items-center gap-3 py-4 border-t border-outline-variant/5"><span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span><div className="flex flex-col"><span className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase tracking-tighter">System Status:</span><span className="font-label-caps text-[10px] text-on-surface-variant/60 uppercase tracking-tighter">Online</span></div></div>
 </div>
@@ -115,12 +106,12 @@ export default function DiagnosticsDark() {
 <h1 className="text-primary-container font-black tracking-widest text-lg" >INSIGHT MONITOR</h1>
 </div>
 <nav className="flex items-center gap-6">
-<a className="relative text-primary-container font-bold text-xs uppercase tracking-wider py-1" href="#" >
+<Link href="#" className="relative text-primary-container font-bold text-xs uppercase tracking-wider py-1">
       Real-time
       <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary-container"></span>
-</a>
-<a className="text-on-surface-variant hover:text-on-surface transition-colors font-bold text-xs uppercase tracking-wider" href="#" >History</a>
-<a className="text-on-surface-variant hover:text-on-surface transition-colors font-bold text-xs uppercase tracking-wider" href="#" >Nodes</a>
+</Link>
+<Link href="#" className="text-on-surface-variant hover:text-on-surface transition-colors font-bold text-xs uppercase tracking-wider">History</Link>
+<Link href="#" className="text-on-surface-variant hover:text-on-surface transition-colors font-bold text-xs uppercase tracking-wider">Nodes</Link>
 </nav>
 </div>
 <div className="flex items-center gap-4">

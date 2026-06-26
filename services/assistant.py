@@ -1,7 +1,5 @@
 """End-to-end orchestration for predictions, decisions, and explanations."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
@@ -183,13 +181,37 @@ def _sliding_window_dataset(
 ) -> tuple[np.ndarray, np.ndarray]:
     """Slide a fixed window across history to build supervised training rows."""
 
-    rows: List[np.ndarray] = []
-    labels: List[int] = []
-    for end in range(window, len(df)):
-        segment = df.iloc[end - window : end]
-        rows.append(pipeline.transform_window(segment).ravel())
-        labels.append(int(df.iloc[end - 1]["failure_within_h"]))
-    return np.vstack(rows), np.array(labels, dtype=int)
+    if len(df) < window:
+        return np.empty((0, len(pipeline.sensor_columns) * 5)), np.array([], dtype=int)
+
+    labels = df["failure_within_h"].iloc[window - 1 : len(df) - 1].astype(int).values
+    sub_df = df[pipeline.sensor_columns].astype(float)
+
+    rolling_obj = sub_df.rolling(window)
+    means = rolling_obj.mean()
+    stds = rolling_obj.std(ddof=0)
+    mins = rolling_obj.min()
+    maxs = rolling_obj.max()
+    lasts = sub_df
+
+    start_idx = window - 1
+    end_idx = len(df) - 1
+    means_sliced = means.iloc[start_idx:end_idx]
+    stds_sliced = stds.iloc[start_idx:end_idx]
+    mins_sliced = mins.iloc[start_idx:end_idx]
+    maxs_sliced = maxs.iloc[start_idx:end_idx]
+    lasts_sliced = lasts.iloc[start_idx:end_idx]
+
+    feature_cols = []
+    for col in pipeline.sensor_columns:
+        feature_cols.append(means_sliced[col].values)
+        feature_cols.append(stds_sliced[col].values)
+        feature_cols.append(mins_sliced[col].values)
+        feature_cols.append(maxs_sliced[col].values)
+        feature_cols.append(lasts_sliced[col].values)
+
+    features = np.column_stack(feature_cols)
+    return features, labels
 
 
 def dataframe_from_records(records: List[Dict[str, Any]]) -> pd.DataFrame:

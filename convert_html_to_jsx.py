@@ -1,8 +1,20 @@
 import os
 import re
 
+# Ensure inputs and outputs are within trusted locations
+workspace_root = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
+
 html_dir = r"c:\ALL CODE\Ai_ANOMALY_DETECTION\frontend\stitch_raw_html"
 output_dir = r"c:\ALL CODE\Ai_ANOMALY_DETECTION\frontend\src\stitch_components"
+
+abs_html_dir = os.path.normcase(os.path.abspath(html_dir))
+abs_output_dir = os.path.normcase(os.path.abspath(output_dir))
+
+if not abs_html_dir.startswith(workspace_root):
+    raise ValueError(f"Security Alert: Input HTML directory {html_dir} must be within the workspace root {workspace_root}")
+
+if not abs_output_dir.startswith(workspace_root):
+    raise ValueError(f"Security Alert: Output JSX directory {output_dir} must be within the workspace root {workspace_root}")
 
 os.makedirs(output_dir, exist_ok=True)
 
@@ -18,6 +30,32 @@ components = {
     "832fc4cc990a4890994c202c17bb8361": "SimulationDark",
     "d9dab79a62d446b0a4d7543f981ebb80": "TelemetryLight"
 }
+
+def sanitize_script_content(content: str) -> str:
+    """Validate and sanitize JavaScript content inside script tags to prevent XSS.
+    
+    This function checks for dangerous patterns such as external network requests,
+    eval, dynamic scripts, and access to sensitive browser storage/cookies.
+    """
+    dangerous_patterns = [
+        (r'\beval\s*\(', "Usage of eval()"),
+        (r'\bFunction\s*\(', "Usage of Function constructor"),
+        (r'\bdocument\.write\b', "Usage of document.write"),
+        (r'\bdocument\.cookie\b', "Access to document.cookie"),
+        (r'\bwindow\.localStorage\b|\blocalStorage\b', "Access to localStorage"),
+        (r'\bwindow\.sessionStorage\b|\bsessionStorage\b', "Access to sessionStorage"),
+        (r'\bwindow\.indexedDB\b|\bindexedDB\b', "Access to indexedDB"),
+        (r'\bXMLHttpRequest\b', "Usage of XMLHttpRequest"),
+        (r'\bfetch\s*\(', "Usage of fetch()"),
+        (r'\bWebSocket\b', "Usage of WebSockets"),
+        (r'\.src\s*=\s*', "Modifying src dynamically"),
+    ]
+
+    for pattern, desc in dangerous_patterns:
+        if re.search(pattern, content):
+            raise ValueError(f"Security Alert: Dynamic / untrusted script content detected ({desc}). Refusing to convert to prevent XSS.")
+    
+    return content
 
 def html_to_jsx(html):
     # Basic replacements
@@ -54,6 +92,8 @@ def html_to_jsx(html):
     # Convert script tags to dangerouslySetInnerHTML, escaping backticks and ${
     def fix_script(match):
         content = match.group(1)
+        # Sanitize JavaScript content to prevent XSS
+        content = sanitize_script_content(content)
         content = content.replace('`', r'\`').replace('${', r'\${')
         return '<script dangerouslySetInnerHTML={{ __html: `' + content + '` }} />'
     jsx = re.sub(r'<script>(.*?)</script>', fix_script, jsx, flags=re.DOTALL | re.IGNORECASE)
@@ -65,11 +105,54 @@ def html_to_jsx(html):
 
     # Suppress hydration warning on canvas elements modified by immediate scripts
     jsx = re.sub(r'<canvas\b([^>]*)>', r'<canvas suppressHydrationWarning\1>', jsx, flags=re.IGNORECASE)
+
+    # Convert a tags to Next.js Link components
+    def fix_anchor(match):
+        attrs = match.group(1)
+        content = match.group(2)
+        
+        # Determine the target URL based on text content
+        text_lower = content.lower()
+        pure_text = re.sub(r'<[^>]*>', '', text_lower).strip()
+        
+        target_href = "#"
+        if "overview" in pure_text or "dashboard" in pure_text:
+            target_href = "/dashboard"
+        elif "telemetry" in pure_text:
+            target_href = "/telemetry"
+        elif "diagnostics" in pure_text:
+            target_href = "/diagnostics"
+        elif "simulation" in pure_text:
+            target_href = "/simulation-lab"
+        elif "maintenance" in pure_text:
+            target_href = "/maintenance-hub"
+        elif any(kw in pure_text for kw in ["launch", "enter", "get started"]):
+            target_href = "/dashboard"
+        else:
+            href_match = re.search(r'href=["\'](.*?)["\']', attrs)
+            if href_match:
+                orig_href = href_match.group(1)
+                if orig_href and orig_href != "#":
+                    target_href = orig_href
+        
+        # Clean existing href and insert the correct target_href
+        attrs_clean = re.sub(r'\bhref=["\'].*?["\']', '', attrs).strip()
+        new_attrs = f'href="{target_href}"'
+        if attrs_clean:
+            new_attrs = f'{new_attrs} {attrs_clean}'
+            
+        return f'<Link {new_attrs}>{content}</Link>'
+
+    jsx = re.sub(r'<a\b([^>]*)>(.*?)</a>', fix_anchor, jsx, flags=re.DOTALL | re.IGNORECASE)
     
     return jsx
 
 for file_id, comp_name in components.items():
-    html_file = os.path.join(html_dir, f"{file_id}.html")
+    # Construct path and ensure no traversal exists
+    html_file = os.path.abspath(os.path.join(html_dir, f"{file_id}.html"))
+    if not os.path.normcase(html_file).startswith(abs_html_dir):
+        raise ValueError(f"Security Alert: Directory traversal attempt detected in file ID {file_id}")
+
     if not os.path.exists(html_file):
         print(f"Skipping {html_file}, not found.")
         continue
@@ -91,6 +174,7 @@ for file_id, comp_name in components.items():
     # Create TSX file
     tsx_code = f'''"use client";
 import React, {{ useEffect, useRef }} from "react";
+import Link from "next/link";
 import {{ useAppContext }} from "@/components/AppContext";
 
 export default function {comp_name}() {{
@@ -160,17 +244,7 @@ export default function {comp_name}() {{
       }}
     }});
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {{
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    }});
+    // Sidebar routing is handled statically via Next.js Link components
 
   }}, [isAbnormal, setIsAbnormal, theme, setTheme]);
 

@@ -35,8 +35,6 @@ Risk and confidence (MVP calibration):
 Explainability strings summarize ``R``, weights, tier boundaries, and ``C``.
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from math import pow
 from typing import Dict, List, Tuple

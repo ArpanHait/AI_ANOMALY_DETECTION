@@ -65,6 +65,33 @@ class IndustrialSensorSimulator:
                 break
 
 
+def _inject_anomaly(
+    t: int,
+    n: int,
+    kind: int,
+    vibration: np.ndarray,
+    temp: np.ndarray,
+    current: np.ndarray,
+    flow: np.ndarray,
+    pressure: np.ndarray,
+    params: SimulationParams,
+    rng: np.random.Generator,
+) -> None:
+    """Apply anomaly spikes or drifts to sensor values at index t."""
+
+    if kind == 0:
+        vibration[t] += params.spike_scale * rng.normal(2.5, 0.4)
+        temp[t] += params.spike_scale * rng.normal(1.2, 0.2)
+    elif kind == 1:
+        current[t] *= 1.0 + params.spike_scale * 0.08
+    elif kind == 2:
+        flow[t] *= 0.65
+        pressure[t] -= 0.35
+    else:
+        vibration[t] += params.drift_scale * (n - t)
+        temp[t] += params.drift_scale * 0.8 * (n - t)
+
+
 def _generate_frame(params: SimulationParams) -> pd.DataFrame:
     """Assemble wear-driven dynamics, correlated noise, and anomaly injections."""
 
@@ -104,17 +131,7 @@ def _generate_frame(params: SimulationParams) -> pd.DataFrame:
         if rng.random() < params.anomaly_probability:
             kind = rng.integers(0, 4)
             anomaly_flag[t] = 1
-            if kind == 0:
-                vibration[t] += params.spike_scale * rng.normal(2.5, 0.4)
-                temp[t] += params.spike_scale * rng.normal(1.2, 0.2)
-            elif kind == 1:
-                current[t] *= 1.0 + params.spike_scale * 0.08
-            elif kind == 2:
-                flow[t] *= 0.65
-                pressure[t] -= 0.35
-            else:
-                vibration[t] += params.drift_scale * (n - t)
-                temp[t] += params.drift_scale * 0.8 * (n - t)
+            _inject_anomaly(t, n, kind, vibration, temp, current, flow, pressure, params, rng)
 
     data = {
         "timestamp": idx,
@@ -138,13 +155,21 @@ def _failure_labels(wear: np.ndarray, horizon: int, threshold: float) -> np.ndar
     """Mark timesteps whose near-future wear trajectory crosses the critical threshold."""
 
     n = len(wear)
-    labels = np.zeros(n, dtype=int)
-    for t in range(n):
-        end = min(n, t + horizon + 1)
-        future = wear[t + 1 : end]
-        if future.size > 0 and np.max(future) >= threshold:
-            labels[t] = 1
-    return labels
+    if n == 0:
+        return np.array([], dtype=int)
+
+    # Compute rolling max on reversed array to look into the future
+    rev_wear = wear[::-1]
+    roll_max_rev = pd.Series(rev_wear).rolling(window=horizon, min_periods=1).max().values
+
+    # Shift right by 1 to exclude the current element and represent the future horizon
+    shifted_rev = np.empty_like(roll_max_rev)
+    shifted_rev[0] = -np.inf
+    shifted_rev[1:] = roll_max_rev[:-1]
+
+    # Reverse back to original order and compare with threshold
+    future_max = shifted_rev[::-1]
+    return (future_max >= threshold).astype(int)
 
 
 def _sensor_covariance() -> np.ndarray:

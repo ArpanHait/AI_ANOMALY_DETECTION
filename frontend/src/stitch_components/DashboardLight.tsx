@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function DashboardLight() {
@@ -69,17 +70,7 @@ export default function DashboardLight() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -93,40 +84,40 @@ export default function DashboardLight() {
 <div className="font-data-sm text-data-sm text-on-surface-variant mt-1 opacity-70">V.4.0 ONLINE</div>
 </div>
 <div className="flex-grow space-y-2">
-<a className="flex items-center space-x-3 p-3 rounded text-on-primary bg-primary border-l-2 border-primary-fixed-dim font-bold font-label-caps text-label-caps scale-95 duration-100" href="#">
+<Link href="/dashboard" className="flex items-center space-x-3 p-3 rounded text-on-primary bg-primary border-l-2 border-primary-fixed-dim font-bold font-label-caps text-label-caps scale-95 duration-100">
 <span className="material-symbols-outlined" >dashboard</span>
 <span className="">Overview</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+</Link>
+<Link href="/telemetry" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">analytics</span>
 <span className="">Live Telemetry</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+</Link>
+<Link href="/diagnostics" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">query_stats</span>
 <span className="">Diagnostics</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+</Link>
+<Link href="/simulation-lab" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">science</span>
 <span className="">Simulation Lab</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+</Link>
+<Link href="/maintenance-hub" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">build</span>
 <span className="">Maintenance Hub</span>
-</a>
+</Link>
 </div>
 <div className="mt-auto pt-4 border-t border-outline-variant">
 <button className="w-full mb-4 bg-primary text-on-primary font-label-caps text-label-caps py-3 rounded hover:bg-on-primary-fixed-variant transition-colors">
                 GENERATE REPORT
             </button>
 <div className="flex flex-col space-y-2">
-<a className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+<Link href="#" className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">terminal</span>
 <span className="">System Logs</span>
-</a>
-<a className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all" href="#">
+</Link>
+<Link href="#" className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant hover:text-on-surface transition-all">
 <span className="material-symbols-outlined">settings</span>
 <span className="">Settings</span>
-</a>
+</Link>
 </div>
 <div className="mt-4 flex items-center space-x-2 text-data-sm font-data-sm text-on-surface-variant">
 <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(0,105,112,0.5)]"></div>
@@ -143,9 +134,9 @@ export default function DashboardLight() {
   </div>
   
   <nav className="hidden md:flex flex-1 justify-center space-x-6 font-label-caps text-label-caps">
-    <a className="text-primary border-b-2 border-primary pb-1" href="#">Real-time</a>
-    <a className="text-on-surface-variant hover:text-primary transition-colors" href="#">History</a>
-    <a className="text-on-surface-variant hover:text-primary transition-colors" href="#">Nodes</a>
+    <Link href="#" className="text-primary border-b-2 border-primary pb-1">Real-time</Link>
+    <Link href="#" className="text-on-surface-variant hover:text-primary transition-colors">History</Link>
+    <Link href="#" className="text-on-surface-variant hover:text-primary transition-colors">Nodes</Link>
   </nav>
   
   <div className="flex items-center justify-end flex-1 space-x-4">

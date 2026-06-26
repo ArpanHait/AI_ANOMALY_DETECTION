@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function AresLandingDark() {
@@ -69,17 +70,7 @@ export default function AresLandingDark() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -94,10 +85,10 @@ export default function AresLandingDark() {
 <span className="font-headline font-bold text-xl tracking-tight text-on-surface">CoreInsight</span>
 </div>
 <nav className="hidden md:flex items-center gap-8">
-<a className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Features</a>
-<a className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Technology</a>
-<a className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Case Studies</a>
-<a className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Pricing</a>
+<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Features</Link>
+<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Technology</Link>
+<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Case Studies</Link>
+<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Pricing</Link>
 </nav>
 <div className="flex items-center gap-4">
 <button className="hidden md:block outline-button px-4 py-2 rounded-md text-sm font-medium">Log In</button>
@@ -268,12 +259,12 @@ export default function AresLandingDark() {
 <span className="material-symbols-outlined text-on-surface-variant">hexagon</span>
 <span className="font-headline font-bold tracking-tight text-on-surface-variant">CoreInsight</span>
 </div>
-<nav className="flex gap-6 text-sm text-on-surface-variant"><a className="hover:text-primary transition-colors" href="#">About</a>
-<a className="hover:text-primary transition-colors" href="#">Privacy</a>
-<a className="hover:text-primary transition-colors" href="#">Terms</a></nav>
+<nav className="flex gap-6 text-sm text-on-surface-variant"><Link href="#" className="hover:text-primary transition-colors">About</Link>
+<Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
+<Link href="#" className="hover:text-primary transition-colors">Terms</Link></nav>
 <div className="flex gap-4 text-on-surface-variant">
-<a className="hover:text-primary transition-colors" href="#"><span className="material-symbols-outlined text-xl">language</span></a>
-<a className="hover:text-primary transition-colors" href="#"><span className="material-symbols-outlined text-xl">share</span></a>
+<Link href="#" className="hover:text-primary transition-colors"><span className="material-symbols-outlined text-xl">language</span></Link>
+<Link href="#" className="hover:text-primary transition-colors"><span className="material-symbols-outlined text-xl">share</span></Link>
 </div>
 </div>
 </footer>

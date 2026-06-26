@@ -1,7 +1,5 @@
 """Streamlit chat-style UI that drives the FastAPI assistant."""
 
-from __future__ import annotations
-
 import sys
 from pathlib import Path
 
@@ -32,8 +30,9 @@ def _build_payload(df: pd.DataFrame, asset_id: str) -> Dict[str, Any]:
         "torque_nm",
     )
     readings: List[Dict[str, Any]] = []
-    for _, row in df.iterrows():
-        ts = row["timestamp"]
+    records = df.to_dict(orient="records")
+    for row in records:
+        ts = row.get("timestamp")
         iso = ts.isoformat() if hasattr(ts, "isoformat") else str(ts)
         reading: Dict[str, Any] = {
             "timestamp": iso,
@@ -45,8 +44,9 @@ def _build_payload(df: pd.DataFrame, asset_id: str) -> Dict[str, Any]:
             "valve_position_pct": float(row["valve_position_pct"]),
         }
         for col in optional_cols:
-            if col in row.index and pd.notna(row[col]):
-                reading[col] = float(row[col])
+            val = row.get(col)
+            if val is not None and pd.notna(val):
+                reading[col] = float(val)
         readings.append(reading)
     return {"asset_id": asset_id, "readings": readings}
 

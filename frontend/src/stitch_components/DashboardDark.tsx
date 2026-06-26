@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function DashboardDark() {
@@ -69,17 +70,7 @@ export default function DashboardDark() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -93,40 +84,40 @@ export default function DashboardDark() {
 <div className="font-data-sm text-data-sm text-on-surface-variant mt-1 opacity-70">V.4.0 ONLINE</div>
 </div>
 <div className="flex-grow space-y-2">
-<a className="flex items-center space-x-3 p-3 rounded text-primary-container bg-primary-container/10 border-l-2 border-primary-container font-bold font-label-caps text-label-caps scale-95 duration-100" href="#">
+<Link href="/dashboard" className="flex items-center space-x-3 p-3 rounded text-primary-container bg-primary-container/10 border-l-2 border-primary-container font-bold font-label-caps text-label-caps scale-95 duration-100">
 <span className="material-symbols-outlined" >dashboard</span>
 <span className="">Overview</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+</Link>
+<Link href="/telemetry" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">analytics</span>
 <span className="">Live Telemetry</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+</Link>
+<Link href="/diagnostics" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">query_stats</span>
 <span className="">Diagnostics</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+</Link>
+<Link href="/simulation-lab" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">science</span>
 <span className="">Simulation Lab</span>
-</a>
-<a className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+</Link>
+<Link href="/maintenance-hub" className="flex items-center space-x-3 p-3 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">build</span>
 <span className="">Maintenance Hub</span>
-</a>
+</Link>
 </div>
 <div className="mt-auto pt-4 border-t border-outline-variant/10">
 <button className="w-full mb-4 bg-primary-container text-on-primary-fixed font-label-caps text-label-caps py-3 rounded hover:bg-primary-fixed transition-colors">
                 GENERATE REPORT
             </button>
 <div className="flex flex-col space-y-2">
-<a className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+<Link href="#" className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">terminal</span>
 <span className="">System Logs</span>
-</a>
-<a className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all" href="#">
+</Link>
+<Link href="#" className="flex items-center space-x-3 p-2 rounded text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-variant/20 hover:text-primary transition-all">
 <span className="material-symbols-outlined">settings</span>
 <span className="">Settings</span>
-</a>
+</Link>
 </div>
 <div className="mt-4 flex items-center space-x-2 text-data-sm font-data-sm text-on-surface-variant">
 <div className="w-2 h-2 rounded-full bg-primary-container animate-pulse shadow-[0_0_8px_rgba(0,240,255,0.8)]"></div>
@@ -137,7 +128,7 @@ export default function DashboardDark() {
 
 <main className="ml-[15%] flex-grow flex h-screen pt-16 pb-gutter px-gutter gap-panel-gap">
 
-<header className="fixed top-0 left-[15%] right-0 h-16 z-40 bg-surface/10 backdrop-blur-md border-b border-outline-variant/5 flex items-center justify-between px-gutter transition-all duration-200 ease-in-out"><div className="flex items-center min-w-[240px]"><div className="font-headline-md text-headline-md font-bold text-primary-container">INSIGHT MONITOR</div></div><nav className="hidden md:flex flex-grow justify-center space-x-6 font-label-caps text-label-caps"><a className="text-primary-container border-b-2 border-primary-container pb-1" href="#">Real-time</a><a className="text-on-surface-variant hover:text-primary transition-colors" href="#">History</a><a className="text-on-surface-variant hover:text-primary transition-colors" href="#">Nodes</a></nav><div className="flex items-center space-x-4 min-w-[240px] justify-end"><button className="bg-error-container/20 border border-error text-error font-label-caps text-label-caps px-4 py-2 rounded hover:bg-error-container/40 transition-colors">EMERGENCY SHUTDOWN</button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">dark_mode</span></button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">notifications</span></button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">account_circle</span></button></div></header>
+<header className="fixed top-0 left-[15%] right-0 h-16 z-40 bg-surface/10 backdrop-blur-md border-b border-outline-variant/5 flex items-center justify-between px-gutter transition-all duration-200 ease-in-out"><div className="flex items-center min-w-[240px]"><div className="font-headline-md text-headline-md font-bold text-primary-container">INSIGHT MONITOR</div></div><nav className="hidden md:flex flex-grow justify-center space-x-6 font-label-caps text-label-caps"><Link href="#" className="text-primary-container border-b-2 border-primary-container pb-1">Real-time</Link><Link href="#" className="text-on-surface-variant hover:text-primary transition-colors">History</Link><Link href="#" className="text-on-surface-variant hover:text-primary transition-colors">Nodes</Link></nav><div className="flex items-center space-x-4 min-w-[240px] justify-end"><button className="bg-error-container/20 border border-error text-error font-label-caps text-label-caps px-4 py-2 rounded hover:bg-error-container/40 transition-colors">EMERGENCY SHUTDOWN</button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">dark_mode</span></button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">notifications</span></button><button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">account_circle</span></button></div></header>
 
 <div className="flex-[55%] flex flex-col gap-panel-gap">
 

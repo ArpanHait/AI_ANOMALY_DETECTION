@@ -1,7 +1,5 @@
 """Matplotlib charts for analyze UX (non-interactive PNG)."""
 
-from __future__ import annotations
-
 import base64
 import io
 from typing import List, Sequence

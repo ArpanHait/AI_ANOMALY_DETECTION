@@ -1,7 +1,5 @@
 """Application configuration loaded from environment with typed defaults."""
 
-from __future__ import annotations
-
 from pathlib import Path
 from typing import Optional
 
@@ -65,6 +63,7 @@ class Settings(BaseSettings):
     stream_max_ticks_cap: int = 50_000
     stream_drift_horizon_steps: int = 12_000
     stream_load_period_steps: int = 5_000
+    cors_allowed_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3000", "http://127.0.0.1:3000"])
 
 
 def get_settings() -> Settings:

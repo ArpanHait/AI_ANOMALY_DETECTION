@@ -1,7 +1,5 @@
 """FastAPI routers for inference, analysis, and explanation."""
 
-from __future__ import annotations
-
 from typing import Any, Dict
 
 from fastapi import APIRouter, Depends, Request

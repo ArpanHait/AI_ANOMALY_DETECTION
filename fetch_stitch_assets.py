@@ -1,6 +1,5 @@
 import os
-import json
-import urllib.request
+from urllib.request import urlretrieve
 
 # Maps from ID -> Name -> downloadUrl
 assets = [
@@ -71,10 +70,10 @@ for asset in assets:
     
     # Download HTML
     html_path = os.path.join(html_dir, f"{asset['id']}.html")
-    urllib.request.urlretrieve(asset['html_url'], html_path)
+    urlretrieve(asset['html_url'], html_path)
     
     # Download Image
     img_path = os.path.join(img_dir, f"{asset['id']}.jpg")
-    urllib.request.urlretrieve(asset['img_url'], img_path)
+    urlretrieve(asset['img_url'], img_path)
 
 print("Downloads complete.")

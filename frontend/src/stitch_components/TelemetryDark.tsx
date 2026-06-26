@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function TelemetryDark() {
@@ -69,17 +70,7 @@ export default function TelemetryDark() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -93,40 +84,40 @@ export default function TelemetryDark() {
 <p className="font-label-caps text-label-caps text-on-surface-variant mt-1">V.4.0 ONLINE</p>
 </div>
 <nav className="flex-grow space-y-1">
-<a className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group" href="#">
+<Link href="/dashboard" className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group">
 <span className="material-symbols-outlined mr-3 text-[20px]" data-icon="dashboard">dashboard</span>
 <span className="font-label-caps text-label-caps">Overview</span>
-</a>
-<a className="flex items-center px-3 py-3 text-primary-container bg-primary-container/10 border-l-2 border-primary-container font-bold active:scale-95 duration-100 group" href="#">
+</Link>
+<Link href="/telemetry" className="flex items-center px-3 py-3 text-primary-container bg-primary-container/10 border-l-2 border-primary-container font-bold active:scale-95 duration-100 group">
 <span className="material-symbols-outlined mr-3 text-[20px]" data-icon="analytics" >analytics</span>
 <span className="font-label-caps text-label-caps">Live Telemetry</span>
-</a>
-<a className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group" href="#">
+</Link>
+<Link href="/diagnostics" className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group">
 <span className="material-symbols-outlined mr-3 text-[20px]" data-icon="query_stats">query_stats</span>
 <span className="font-label-caps text-label-caps">Diagnostics</span>
-</a>
-<a className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group" href="#">
+</Link>
+<Link href="/simulation-lab" className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group">
 <span className="material-symbols-outlined mr-3 text-[20px]" data-icon="science">science</span>
 <span className="font-label-caps text-label-caps">Simulation Lab</span>
-</a>
-<a className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group" href="#">
+</Link>
+<Link href="/maintenance-hub" className="flex items-center px-3 py-3 font-medium text-on-surface-variant hover:bg-surface-variant/20 hover:text-primary transition-all active:scale-95 duration-100 group">
 <span className="material-symbols-outlined mr-3 text-[20px]" data-icon="build">build</span>
 <span className="font-label-caps text-label-caps">Maintenance Hub</span>
-</a>
+</Link>
 </nav>
 <div className="mt-auto pt-6 border-t border-outline-variant/10">
 <button className="w-full py-3 bg-primary-container text-on-primary-container font-label-caps text-label-caps font-bold hover:brightness-110 transition-all active:scale-95 mb-6">
                 GENERATE REPORT
             </button>
 <div className="space-y-1">
-<a className="flex items-center px-3 py-2 text-on-surface-variant font-medium hover:text-primary transition-all text-xs" href="#">
+<Link href="#" className="flex items-center px-3 py-2 text-on-surface-variant font-medium hover:text-primary transition-all text-xs">
 <span className="material-symbols-outlined mr-2 text-[18px]" data-icon="terminal">terminal</span>
 <span className="font-label-caps text-label-caps">System Logs</span>
-</a>
-<a className="flex items-center px-3 py-2 text-on-surface-variant font-medium hover:text-primary transition-all text-xs" href="#">
+</Link>
+<Link href="#" className="flex items-center px-3 py-2 text-on-surface-variant font-medium hover:text-primary transition-all text-xs">
 <span className="material-symbols-outlined mr-2 text-[18px]" data-icon="settings">settings</span>
 <span className="font-label-caps text-label-caps">Settings</span>
-</a>
+</Link>
 </div>
 <div className="mt-6 flex items-center gap-3 px-3">
 <div className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant/20 overflow-hidden">
@@ -144,9 +135,9 @@ export default function TelemetryDark() {
 <div className="flex items-center gap-8 flex-1">
 <h2 className="font-headline-md text-headline-md font-bold text-primary-container">INSIGHT MONITOR</h2>
 <div className="flex gap-6 flex-1 justify-center">
-<a className="font-label-caps text-label-caps text-primary-container border-b-2 border-primary-container pb-1 transition-all duration-200 ease-in-out" href="#">Real-time</a>
-<a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out" href="#">History</a>
-<a className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out" href="#">Nodes</a>
+<Link href="#" className="font-label-caps text-label-caps text-primary-container border-b-2 border-primary-container pb-1 transition-all duration-200 ease-in-out">Real-time</Link>
+<Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out">History</Link>
+<Link href="#" className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out">Nodes</Link>
 </div>
 </div>
 <div className="flex items-center gap-6">

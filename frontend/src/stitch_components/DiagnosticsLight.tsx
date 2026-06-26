@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 
 export default function DiagnosticsLight() {
@@ -69,17 +70,7 @@ export default function DiagnosticsLight() {
       }
     });
 
-    // Fix Sidebar Routing
-    const links = containerRef.current.querySelectorAll('a');
-    links.forEach(a => {
-      const text = a.textContent?.toLowerCase() || '';
-      if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
-      else if (text.includes('telemetry')) a.href = '/telemetry';
-      else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation-lab';
-      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
-      else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
-    });
+    // Sidebar routing is handled statically via Next.js Link components
 
   }, [isAbnormal, setIsAbnormal, theme, setTheme]);
 
@@ -92,9 +83,9 @@ export default function DiagnosticsLight() {
 <span className="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface">CORE INSIGHT</span>
 </div>
 <nav className="hidden md:flex flex-1 justify-center gap-lg">
-<a className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded" href="#">Real-time</a>
-<a className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded" href="#">History</a>
-<a className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded" href="#">Nodes</a>
+<Link href="#" className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded">Real-time</Link>
+<Link href="#" className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded">History</Link>
+<Link href="#" className="text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-150 px-sm py-xs rounded">Nodes</Link>
 </nav>
 <div className="flex items-center gap-md">
 <button className="bg-[#0f172a] text-[#00f0ff] px-md py-sm rounded border border-transparent hover:border-[#00f0ff] transition-all font-label-caps text-label-caps" >Emergency Shutdown</button>
@@ -125,26 +116,26 @@ export default function DiagnosticsLight() {
 </div>
 </div>
 <nav className="flex-1 flex flex-col gap-xs px-sm">
-<a className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200" href="#">
+<Link href="/dashboard" className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200">
 <span className="material-symbols-outlined" >dashboard</span>
 <span className="font-label-caps text-label-caps">Overview</span>
-</a>
-<a className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200" href="#">
+</Link>
+<Link href="/telemetry" className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200">
 <span className="material-symbols-outlined" >analytics</span>
 <span className="font-label-caps text-label-caps">Telemetry</span>
-</a>
-<a className="flex items-center gap-md px-md py-sm rounded-r-none bg-secondary-container/20 text-primary border-r-4 border-primary translate-x-1 transition-transform" href="#">
+</Link>
+<Link href="/diagnostics" className="flex items-center gap-md px-md py-sm rounded-r-none bg-secondary-container/20 text-primary border-r-4 border-primary translate-x-1 transition-transform">
 <span className="material-symbols-outlined" >biotech</span>
 <span className="font-label-caps text-label-caps">Diagnostics</span>
-</a>
-<a className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200" href="#">
+</Link>
+<Link href="/simulation-lab" className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200">
 <span className="material-symbols-outlined" >science</span>
 <span className="font-label-caps text-label-caps">Simulation Lab</span>
-</a>
-<a className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200" href="#">
+</Link>
+<Link href="/maintenance-hub" className="flex items-center gap-md px-md py-sm rounded-r-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all duration-200">
 <span className="material-symbols-outlined" >engineering</span>
 <span className="font-label-caps text-label-caps">Maintenance Hub</span>
-</a>
+</Link>
 </nav>
 </aside>
 

@@ -71,7 +71,7 @@ async def _anomaly_stream_events(
             continue
         df = buf.to_dataframe()
         df_ml = df.drop(columns=["sim_anomaly_flag"], errors="ignore")
-        preds = assistant.predict_window(df_ml)
+        preds = await asyncio.to_thread(assistant.predict_window, df_ml)
         ts = row["timestamp"]
         ts_out = ts.isoformat() if hasattr(ts, "isoformat") else str(ts)
         payload = {

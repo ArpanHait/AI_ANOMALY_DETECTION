@@ -1,7 +1,5 @@
 """FastAPI entrypoint for the technical decision assistant."""
 
-from __future__ import annotations
-
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -24,6 +22,8 @@ async def lifespan(app: FastAPI):
     yield
 
 
+settings = get_settings()
+
 app = FastAPI(
     title="Smart AI Assistant for Technical Decision-Making",
     version="0.1.0",
@@ -31,7 +31,7 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.cors_allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
