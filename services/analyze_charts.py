@@ -21,21 +21,17 @@ def collect_highlight_indices(df: pd.DataFrame, model_anomaly_last: bool) -> Lis
 
     idx_set: set[int] = set()
     if "anomaly_flag" in df.columns:
-        for pos in range(len(df)):
-            try:
-                if int(df["anomaly_flag"].iloc[pos]) == 1:
-                    idx_set.add(pos)
-            except (ValueError, TypeError):
-                continue
+        anomaly_numeric = pd.to_numeric(df["anomaly_flag"], errors="coerce")
+        anom_positions = np.where(anomaly_numeric == 1)[0]
+        idx_set.update(anom_positions.tolist())
     if model_anomaly_last:
         idx_set.add(len(df) - 1)
     if "vibration_rms" in df.columns and len(df) > 3:
         v = df["vibration_rms"].astype(float).values
         mu = float(np.mean(v))
         sigma = float(np.std(v)) + 1e-9
-        for pos in range(len(v)):
-            if abs(v[pos] - mu) / sigma > 2.4:
-                idx_set.add(pos)
+        anom_indices = np.where(np.abs(v - mu) / sigma > 2.4)[0]
+        idx_set.update(anom_indices.tolist())
     return sorted(idx_set)
 
 

@@ -1,7 +1,5 @@
 """Real-time anomaly streaming over WebSocket and NDJSON."""
 
-from __future__ import annotations
-
 import asyncio
 import json
 from typing import Any, AsyncIterator, Dict, Optional

@@ -76,7 +76,8 @@ export default function AresLandingLight() {
       if (text.includes('overview') || text.includes('dashboard')) a.href = '/dashboard';
       else if (text.includes('telemetry')) a.href = '/telemetry';
       else if (text.includes('diagnostics')) a.href = '/diagnostics';
-      else if (text.includes('simulation')) a.href = '/simulation';
+      else if (text.includes('simulation')) a.href = '/simulation-lab';
+      else if (text.includes('maintenance')) a.href = '/maintenance-hub';
       else if (text.includes('launch') || text.includes('enter') || text.includes('get started')) a.href = '/dashboard';
     });
 

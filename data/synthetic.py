@@ -1,7 +1,5 @@
 """Synthetic industrial multivariate time series for demos and training."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import Iterator, List, Optional
 
