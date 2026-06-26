@@ -116,30 +116,30 @@ export default function Home() {
             </span>
           </div>
           <nav className="hidden md:flex items-center gap-8">
-            <a
+            <Link
               className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium"
-              href="#"
+              href="#features"
             >
               Features
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium"
-              href="#"
+              href="#technology"
             >
               Technology
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium"
-              href="#"
+              href="#case-studies"
             >
               Case Studies
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium"
-              href="#"
+              href="#pricing"
             >
               Pricing
-            </a>
+            </Link>
           </nav>
           <div className="flex items-center gap-4">
             <button 
@@ -297,7 +297,7 @@ export default function Home() {
         </section>
 
         {/* Features Bento Grid */}
-        <section className="py-24 max-w-7xl mx-auto px-6">
+        <section id="features" className="py-24 max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <h2 className="font-headline text-3xl md:text-4xl font-bold mb-4 text-on-surface">
               Industrial Intelligence. <br />
@@ -402,6 +402,310 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Technology Section */}
+        <section id="technology" className="py-24 border-t border-outline-variant/30 max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-primary font-mono text-xs tracking-wider uppercase mb-3 block">Neural Architecture</span>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold mb-6 text-on-surface">
+                Engineered for High-Stakes Telemetry.
+              </h2>
+              <p className="text-on-surface-variant mb-6 font-body leading-relaxed">
+                ARES-1 processes multivariate time-series data at sub-millisecond speeds. Our backend leverages optimized Autoencoders and LSTM neural networks that reconstruct normal operations and flag any deviations instantly.
+              </p>
+              <div className="space-y-4">
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 border border-primary/20">
+                    <span className="material-symbols-outlined text-sm">settings_input_antenna</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-on-surface text-base">Real-Time WebSocket Ingestion</h4>
+                    <p className="text-sm text-on-surface-variant">Continuous streaming support with zero buffering latency, feeding live sensory telemetry directly into prediction nodes.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 border border-primary/20">
+                    <span className="material-symbols-outlined text-sm">network_node</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-on-surface text-base">Autoencoder Reconstruction Index</h4>
+                    <p className="text-sm text-on-surface-variant">Instead of simple threshold checks, ARES-1 models system co-movement to isolate the true origin of micro-anomalies.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 border border-primary/20">
+                    <span className="material-symbols-outlined text-sm">insights</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-on-surface text-base">SHAP Root Cause Analysis</h4>
+                    <p className="text-sm text-on-surface-variant">Explainable AI breakdowns pointing operators directly to the faulty valve, bearing, or thermal loop.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Architecture Diagram */}
+            <div className="relative p-8 bento-card border border-outline-variant rounded-xl bg-surface-container/20 overflow-hidden">
+              <div className="absolute inset-0 bg-radial-gradient from-primary/5 to-transparent pointer-events-none"></div>
+              <div className="relative z-10 flex flex-col gap-6">
+                <div className="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+                    <span className="font-mono text-xs text-on-surface-variant uppercase tracking-wider">ARES-1 Pipeline Status: Warm</span>
+                  </div>
+                  <span className="font-mono text-[10px] text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">V.4.2 LIVE</span>
+                </div>
+
+                <div className="flex flex-col gap-4 font-mono text-xs">
+                  {/* Step 1 */}
+                  <div className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <span className="text-on-surface-variant">01</span>
+                      <span className="text-on-surface font-bold">Telemetry Ingestion</span>
+                    </div>
+                    <span className="text-[10px] text-secondary">WS://STREAM_IN</span>
+                  </div>
+                  
+                  {/* Arrow 1 */}
+                  <div className="h-4 flex justify-center items-center">
+                    <span className="material-symbols-outlined text-sm text-primary/40">arrow_downward</span>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <span className="text-on-surface-variant">02</span>
+                      <span className="text-on-surface font-bold">Neural Autoencoder</span>
+                    </div>
+                    <span className="text-[10px] text-primary">RECONSTRUCTION</span>
+                  </div>
+
+                  {/* Arrow 2 */}
+                  <div className="h-4 flex justify-center items-center">
+                    <span className="material-symbols-outlined text-sm text-primary/40">arrow_downward</span>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <span className="text-on-surface-variant">03</span>
+                      <span className="text-on-surface font-bold">SHAP Anomaly Contribution</span>
+                    </div>
+                    <span className="text-[10px] text-error font-bold">VALVE_X99_OVERLOAD</span>
+                  </div>
+
+                  {/* Arrow 3 */}
+                  <div className="h-4 flex justify-center items-center">
+                    <span className="material-symbols-outlined text-sm text-primary/40">arrow_downward</span>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <span className="text-on-surface-variant">04</span>
+                      <span className="text-on-surface font-bold">Actionable Alert Dispatched</span>
+                    </div>
+                    <span className="text-[10px] text-secondary">TRIGGERED (14h Lead)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Case Studies Section */}
+        <section id="case-studies" className="py-24 border-t border-outline-variant/30 bg-surface-container-low/50">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-16 text-center">
+              <span className="text-primary font-mono text-xs tracking-wider uppercase mb-3 block">Operational Proof</span>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold mb-4 text-on-surface">
+                Success Stories in Failure Prevention.
+              </h2>
+              <p className="text-on-surface-variant max-w-2xl mx-auto font-body">
+                See how ARES-1 prevented catastrophic breakdowns and optimized uptime across heavy industrial deployments.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Case 1 */}
+              <div className="bento-card p-8 flex flex-col justify-between h-full relative overflow-hidden group">
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="font-mono text-xs text-primary font-bold">NEXUS CORP</span>
+                    <span className="material-symbols-outlined text-primary text-xl">token</span>
+                  </div>
+                  <h3 className="font-headline text-xl font-bold text-on-surface mb-3">
+                    Turbine Cavitation Early Warning
+                  </h3>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    Autoencoders detected low-amplitude high-frequency vibration spikes on turbine bearings 14 hours before standard alerts, avoiding $1.2M in turbine housing rebuilds.
+                  </p>
+                </div>
+                <div className="border-t border-outline-variant/30 pt-4 mt-auto">
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="text-on-surface-variant">LEAD TIME</span>
+                    <span className="text-secondary font-bold">14 HOURS</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Case 2 */}
+              <div className="bento-card p-8 flex flex-col justify-between h-full relative overflow-hidden group">
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="font-mono text-xs text-primary font-bold">TRI-STATE</span>
+                    <span className="material-symbols-outlined text-primary text-xl">change_history</span>
+                  </div>
+                  <h3 className="font-headline text-xl font-bold text-on-surface mb-3">
+                    Valve Position Slip Prevention
+                  </h3>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    Identified micro-anomalies on fluid valves due to slow torque degradation, allowing maintenance during scheduled breaks rather than triggering an emergency cutoff.
+                  </p>
+                </div>
+                <div className="border-t border-outline-variant/30 pt-4 mt-auto">
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="text-on-surface-variant">MAINTENANCE COST</span>
+                    <span className="text-secondary font-bold">92% SAVED</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Case 3 */}
+              <div className="bento-card p-8 flex flex-col justify-between h-full relative overflow-hidden group">
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="font-mono text-xs text-primary font-bold">AETHER HEAVY</span>
+                    <span className="material-symbols-outlined text-primary text-xl">all_inclusive</span>
+                  </div>
+                  <h3 className="font-headline text-xl font-bold text-on-surface mb-3">
+                    High-Temp Fluid Pump Isolation
+                  </h3>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    SHAP attribution model identified inlet pressure flow rate anomalies as the source of a thermal overload warning, completing remote isolation in under 2 minutes.
+                  </p>
+                </div>
+                <div className="border-t border-outline-variant/30 pt-4 mt-auto">
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="text-on-surface-variant">RESPONSE TIME</span>
+                    <span className="text-secondary font-bold">2 MINUTES</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="py-24 border-t border-outline-variant/30 max-w-7xl mx-auto px-6">
+          <div className="mb-16 text-center">
+            <span className="text-primary font-mono text-xs tracking-wider uppercase mb-3 block">Deployment Options</span>
+            <h2 className="font-headline text-3xl md:text-4xl font-bold mb-4 text-on-surface">
+              Simple, Transparent Pricing Plans.
+            </h2>
+            <p className="text-on-surface-variant max-w-2xl mx-auto font-body">
+              Deploy ARES-1 on-premise or in the cloud. Select a plan to scale uptime across your operations.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            {/* Plan 1 */}
+            <div className="bento-card p-8 flex flex-col justify-between border border-outline-variant rounded-xl bg-surface-container/10">
+              <div>
+                <h3 className="font-headline text-lg font-bold text-on-surface mb-2">Pilot</h3>
+                <p className="text-xs text-on-surface-variant mb-6">Perfect for testing with live sensor simulators.</p>
+                <div className="text-4xl font-headline font-bold text-on-surface mb-6">
+                  $0 <span className="text-xs font-mono text-on-surface-variant">/ 30 DAYS</span>
+                </div>
+                <ul className="space-y-3 text-sm text-on-surface-variant mb-8">
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    1 active asset simulation
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    Baseline LSTM predictions
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    64-step rolling window size
+                  </li>
+                </ul>
+              </div>
+              <Link href="/dashboard" className="outline-button w-full text-center py-3 rounded-lg text-sm font-bold block">
+                Start Pilot
+              </Link>
+            </div>
+
+            {/* Plan 2 */}
+            <div className="bento-card p-8 flex flex-col justify-between border border-primary/50 rounded-xl bg-surface-container/20 relative shadow-lg shadow-primary/5">
+              <div className="absolute -top-3 right-6 bg-primary text-on-primary font-mono text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                Most Popular
+              </div>
+              <div>
+                <h3 className="font-headline text-lg font-bold text-on-surface mb-2">Scale</h3>
+                <p className="text-xs text-on-surface-variant mb-6">Designed for mid-sized factory floor assets.</p>
+                <div className="text-4xl font-headline font-bold text-on-surface mb-6">
+                  $1,499 <span className="text-xs font-mono text-on-surface-variant">/ MONTH</span>
+                </div>
+                <ul className="space-y-3 text-sm text-on-surface-variant mb-8">
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    Up to 15 active telemetry assets
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    SHAP Root Cause diagnostics
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    API & Webhook notification integrations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    24/7 technical chat support
+                  </li>
+                </ul>
+              </div>
+              <Link href="/dashboard" className="primary-button w-full text-center py-3 rounded-lg text-sm font-bold block shadow-lg shadow-primary/10">
+                Deploy Scale
+              </Link>
+            </div>
+
+            {/* Plan 3 */}
+            <div className="bento-card p-8 flex flex-col justify-between border border-outline-variant rounded-xl bg-surface-container/10">
+              <div>
+                <h3 className="font-headline text-lg font-bold text-on-surface mb-2">Enterprise</h3>
+                <p className="text-xs text-on-surface-variant mb-6">Full digital twin lab and customization.</p>
+                <div className="text-4xl font-headline font-bold text-on-surface mb-6">
+                  Custom <span className="text-xs font-mono text-on-surface-variant">QUOTE</span>
+                </div>
+                <ul className="space-y-3 text-sm text-on-surface-variant mb-8">
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    Unlimited active assets & digital twins
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    Custom neural network fine-tuning
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    Dedicated FastAPI server cluster
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm text-primary">check</span>
+                    On-premise deployment assistance
+                  </li>
+                </ul>
+              </div>
+              <button className="outline-button w-full text-center py-3 rounded-lg text-sm font-bold block">
+                Contact Sales
+              </button>
             </div>
           </div>
         </section>

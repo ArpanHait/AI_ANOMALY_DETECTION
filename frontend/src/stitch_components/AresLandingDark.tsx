@@ -85,10 +85,10 @@ export default function AresLandingDark() {
 <span className="font-headline font-bold text-xl tracking-tight text-on-surface">CoreInsight</span>
 </div>
 <nav className="hidden md:flex items-center gap-8">
-<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Features</Link>
-<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Technology</Link>
-<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Case Studies</Link>
-<Link href="#" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Pricing</Link>
+<Link href="#features" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Features</Link>
+<Link href="#technology" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Technology</Link>
+<Link href="#case-studies" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Case Studies</Link>
+<Link href="#pricing" className="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium">Pricing</Link>
 </nav>
 <div className="flex items-center gap-4">
 <button className="hidden md:block outline-button px-4 py-2 rounded-md text-sm font-medium">Log In</button>
@@ -178,7 +178,7 @@ export default function AresLandingDark() {
 </div>
 </section>
 
-<section className="py-24 max-w-7xl mx-auto px-6">
+<section id="features" className="py-24 max-w-7xl mx-auto px-6">
 <div className="mb-16">
 <h2 className="font-headline text-3xl md:text-4xl font-bold mb-4 text-on-surface">Industrial Intelligence. <br/><span className="text-primary">Without the noise.</span></h2>
 <p className="text-on-surface-variant max-w-2xl font-body">Our architecture is designed for precision. No bloated dashboards—just actionable telemetry and predictive insights.</p>
