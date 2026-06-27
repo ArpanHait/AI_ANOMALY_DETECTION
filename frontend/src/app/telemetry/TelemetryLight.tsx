@@ -2,6 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
+import TelemetryChartsLight from "./components/TelemetryChartsLight";
+import TelemetryStatsLight from "./components/TelemetryStatsLight";
 
 export default function TelemetryLight() {
   const { theme, setTheme } = useAppContext();
@@ -134,183 +136,10 @@ export default function TelemetryLight() {
         </div>
 
         {/* Upper Section: Charts (60% Height) */}
-        <div className="flex-[6] min-h-0 flex flex-col gap-4">
-          {/* Chart 1 */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] flex-1 min-h-0 p-4 flex flex-col relative group rounded-xl">
-            <div className="flex justify-between items-start mb-2">
-              <span className="font-mono text-[11px] font-bold text-on-surface-variant uppercase">VIBRATION RMS VS NOMINAL BAND</span>
-              <span className="font-mono text-[12px] text-error font-bold animate-pulse">CRITICAL SPIKE DETECTED</span>
-            </div>
-            <div className="w-full h-[calc(100%-20px)] overflow-hidden bg-surface-container rounded border border-outline-variant relative">
-              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 120">
-                {/* Safe Zone */}
-                <rect fill="rgba(0, 105, 112, 0.05)" height="40" width="1000" x="0" y="40"></rect>
-                {/* Nominal Line */}
-                <line stroke="#bfc8c9" strokeDasharray="4" x1="0" x2="1000" y1="60" y2="60"></line>
-                {/* Red Line Spiking */}
-                <path className="drop-shadow-[0_2px_4px_rgba(186,26,26,0.2)]" d="M0,70 L100,65 L200,68 L300,60 L400,65 L500,10 L600,105 L700,40 L800,60 L900,55 L1000,62" fill="none" stroke="#ba1a1a" strokeWidth="2.5"></path>
-              </svg>
-            </div>
-          </div>
-          {/* Chart 2 */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] flex-1 min-h-0 p-4 flex flex-col relative group rounded-xl">
-            <div className="flex justify-between items-start mb-2">
-              <span className="font-mono text-[11px] font-bold text-on-surface-variant uppercase">BEARING TEMPERATURE</span>
-              <span className="font-mono text-[12px] text-secondary font-bold">+2.4°C / HR TREND</span>
-            </div>
-            <div className="w-full h-[calc(100%-20px)] overflow-hidden bg-surface-container rounded border border-outline-variant relative">
-              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 120">
-                {/* Yellow Line Trending Up */}
-                <path className="drop-shadow-[0_2px_4px_rgba(126,87,0,0.2)]" d="M0,90 L150,85 L300,80 L450,70 L600,65 L750,50 L900,45 L1000,40" fill="none" stroke="#7e5700" strokeWidth="2.5"></path>
-              </svg>
-            </div>
-          </div>
-          {/* Chart 3 */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] flex-1 min-h-0 p-4 flex flex-col relative group rounded-xl">
-            <div className="flex justify-between items-start mb-2">
-              <span className="font-mono text-[11px] font-bold text-on-surface-variant uppercase">MOTOR RPM</span>
-              <span className="font-mono text-[12px] text-primary font-bold">STABLE NOMINAL</span>
-            </div>
-            <div className="w-full h-[calc(100%-20px)] overflow-hidden bg-surface-container rounded border border-outline-variant relative">
-              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 120">
-                {/* Cyan Line Stable */}
-                <path className="drop-shadow-[0_2px_4px_rgba(0,105,112,0.2)]" d="M0,60 L100,58 L200,62 L300,60 L400,59 L500,61 L600,60 L700,58 L800,62 L900,60 L1000,60" fill="none" stroke="#006970" strokeWidth="2.5"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
+        <TelemetryChartsLight />
 
         {/* Lower Section: Telemetry Grid (40% Height) */}
-        <div className="flex-[4] min-h-0 grid grid-cols-4 grid-rows-2 gap-4">
-          {/* Vibration RMS */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-error rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Vibration RMS</span>
-              <span className="px-2 py-0.5 bg-error-container text-on-error-container font-mono text-[9px] rounded font-bold animate-pulse">CRITICAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-error font-bold leading-none">14.2</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">MM/S</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M0,10 L10,12 L20,8 L30,15 L40,5 L50,18 L60,2 L70,14 L80,6 L90,12 L100,10" fill="none" stroke="#ba1a1a" strokeWidth="1.5"></path>
-              </svg>
-            </div>
-          </div>
-          {/* Bearing Temp */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-secondary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Bearing Temp</span>
-              <span className="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-mono text-[9px] rounded font-bold">WARNING</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-secondary font-bold leading-none">85.5</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">°C</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M0,18 L20,16 L40,14 L60,10 L80,8 L100,5" fill="none" stroke="#7e5700" strokeWidth="1.5"></path>
-              </svg>
-            </div>
-          </div>
-          {/* Motor Current */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Motor Current</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-on-surface font-bold leading-none">42.1</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">A</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <line stroke="#bfc8c9" strokeWidth="1.5" x1="0" x2="100" y1="10" y2="10"></line>
-              </svg>
-            </div>
-          </div>
-          {/* Motor RPM */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Motor RPM</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-on-surface font-bold leading-none">1745.0</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">RPM</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <line stroke="#bfc8c9" strokeWidth="1.5" x1="0" x2="100" y1="10" y2="10"></line>
-              </svg>
-            </div>
-          </div>
-          {/* System Pressure */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">System Pressure</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-on-surface font-bold leading-none">115.2</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">PSI</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <line stroke="#bfc8c9" strokeWidth="1.5" x1="0" x2="100" y1="10" y2="10"></line>
-              </svg>
-            </div>
-          </div>
-          {/* Inlet Pressure */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Inlet Pressure</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-on-surface font-bold leading-none">12.0</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">BAR</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <line stroke="#bfc8c9" strokeWidth="1.5" x1="0" x2="100" y1="10" y2="10"></line>
-              </svg>
-            </div>
-          </div>
-          {/* Flow Rate */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Flow Rate</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-primary font-bold leading-none">110.5</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">L/MIN</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M0,2 L25,5 L50,8 L75,15 L100,18" fill="none" stroke="#006970" strokeWidth="1.5"></path>
-              </svg>
-            </div>
-          </div>
-          {/* Valve Position */}
-          <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] p-4 flex flex-col justify-between border-t-4 border-t-primary rounded-xl">
-            <div className="flex justify-between items-start">
-              <span className="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Valve Position</span>
-              <span className="px-2 py-0.5 bg-primary-container text-on-primary-container font-mono text-[9px] rounded font-bold">NORMAL</span>
-            </div>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-headline text-[32px] text-on-surface font-bold leading-none">45.0</span>
-              <span className="font-mono text-on-surface-variant text-[12px] font-bold">%</span>
-            </div>
-            <div className="mt-auto flex-1 min-h-[20px] max-h-8 w-full">
-              <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <line stroke="#bfc8c9" strokeWidth="1.5" x1="0" x2="100" y1="10" y2="10"></line>
-              </svg>
-            </div>
-          </div>
-        </div>
+        <TelemetryStatsLight />
       </main>
     </div>
   );

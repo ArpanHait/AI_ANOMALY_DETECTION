@@ -2,6 +2,8 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
+import DiagnosticsRadarLight from "./components/DiagnosticsRadarLight";
+import DiagnosticsTerminalLight from "./components/DiagnosticsTerminalLight";
 
 export default function DiagnosticsLight() {
   const { isAbnormal, setIsAbnormal, theme, setTheme } = useAppContext();
@@ -142,135 +144,8 @@ export default function DiagnosticsLight() {
 <main className="flex-1 ml-64 p-lg overflow-y-auto bg-surface-container-low">
 <div className="flex gap-lg h-full">
 
-<div className="w-1/3 flex flex-col gap-md">
-<h2 className="font-title-md text-title-md text-on-surface pb-sm border-b border-outline-variant">Root Cause Radar</h2>
-<div className="flex flex-col gap-sm overflow-y-auto pr-sm">
-
-<div className="bg-error-container border border-error rounded p-md cursor-pointer hover:shadow-sm transition-shadow">
-<div className="flex justify-between items-start mb-sm">
-<div className="flex items-center gap-xs text-error">
-<span className="material-symbols-outlined text-[18px]" >warning</span>
-<span className="font-label-caps text-label-caps">CRITICAL</span>
-</div>
-<span className="font-mono-data text-mono-data text-error">98% PROBABILITY</span>
-</div>
-<h3 className="font-title-md text-title-md text-on-error-container mb-xs">Impending Bearing Failure</h3>
-<p className="font-body-sm text-body-sm text-on-error-container/80 mb-sm">Excessive vibration detected in primary centrifuge spindle. Immediate intervention required to prevent catastrophic failure.</p>
-<div className="flex gap-xs mt-auto">
-<span className="bg-surface/50 text-on-error-container font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">NODE: CF-04</span>
-<span className="bg-surface/50 text-on-error-container font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">VIB: 14.2 mm/s</span>
-</div>
-</div>
-
-<div className="bg-surface-container-lowest border border-outline-variant rounded p-md cursor-pointer hover:border-primary transition-colors">
-<div className="flex justify-between items-start mb-sm">
-<div className="flex items-center gap-xs text-on-surface-variant">
-<span className="material-symbols-outlined text-[18px]">build</span>
-<span className="font-label-caps text-label-caps">ELEVATED RISK</span>
-</div>
-<span className="font-mono-data text-mono-data text-on-surface-variant">64% PROBABILITY</span>
-</div>
-<h3 className="font-title-md text-title-md text-on-surface mb-xs">Thermal Gradient Anomaly</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant mb-sm">Cooling loop 2 showing reduced efficiency. Potential coolant flow restriction or sensor drift.</p>
-<div className="flex gap-xs mt-auto">
-<span className="bg-surface-container text-on-surface font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">NODE: CL-02</span>
-<span className="bg-surface-container text-on-surface font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">DELTA-T: 4.8°C</span>
-</div>
-</div>
-
-<div className="bg-surface-container-lowest border border-outline-variant rounded p-md cursor-pointer hover:border-primary transition-colors">
-<div className="flex justify-between items-start mb-sm">
-<div className="flex items-center gap-xs text-on-surface-variant">
-<span className="material-symbols-outlined text-[18px]">network_check</span>
-<span className="font-label-caps text-label-caps">MODERATE RISK</span>
-</div>
-<span className="font-mono-data text-mono-data text-on-surface-variant">32% PROBABILITY</span>
-</div>
-<h3 className="font-title-md text-title-md text-on-surface mb-xs">Data Latency Spike</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant mb-sm">Intermittent packet loss detected on secondary diagnostic bus. Monitoring required.</p>
-<div className="flex gap-xs mt-auto">
-<span className="bg-surface-container text-on-surface font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">BUS: DIAG-B</span>
-<span className="bg-surface-container text-on-surface font-mono-data text-mono-data px-xs py-[2px] rounded text-[10px]">LOSS: 0.4%</span>
-</div>
-</div>
-</div>
-</div>
-
-<div className="w-2/3 flex flex-col gap-md bg-surface-container-lowest border border-outline-variant rounded shadow-sm overflow-hidden">
-
-<div className="flex items-center justify-between px-md py-sm border-b border-outline-variant bg-surface-container-high">
-<div className="flex items-center gap-sm">
-<span className="material-symbols-outlined text-primary text-[18px]">terminal</span>
-<span className="font-label-caps text-label-caps text-on-surface">AI DIAGNOSTIC TERMINAL // CF-04</span>
-</div>
-<div className="flex gap-xs">
-<button className="p-xs text-on-surface-variant hover:text-on-surface"><span className="material-symbols-outlined text-[16px]">content_copy</span></button>
-<button className="p-xs text-on-surface-variant hover:text-on-surface"><span className="material-symbols-outlined text-[16px]">open_in_full</span></button>
-</div>
-</div>
-
-<div className="flex-1 bg-[#1e293b] p-md overflow-y-auto font-mono-data text-[13px] text-[#e2e8f0] leading-relaxed relative">
-<div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" ></div>
-<pre><code>{"{"}
-  "diagnostic_request": "CF-04_VIB_ANALYSIS",
-  "timestamp": "2024-05-20T14:32:01Z",
-  "status": "PROCESSING_COMPLETE",
-  "ai_confidence": 0.984,
-  "payload": {"{"}
-    "sensor_data": {"{"}
-      "x_axis": [12.4, 13.1, 14.2, 14.5, 15.0],
-      "y_axis": [8.2, 8.5, 9.1, 9.8, 10.2],
-      "z_axis": [4.1, 4.3, 4.2, 4.5, 4.8]
-    {"}"},
-    "fft_analysis": {"{"}
-      "dominant_frequency_hz": 120.5,
-      "harmonics_detected": true,
-      "harmonic_ratio": 2.4
-    {"}"},
-    "historical_correlation": {"{"}
-      "match_found": true,
-      "reference_id": "INC-2023-08-14-A",
-      "similarity_score": 0.92
-    {"}"},
-    "recommendation": [
-      "INITIATE CONTROLLED SHUTDOWN SEQUENCE CF-04",
-      "DISPATCH MAINTENANCE CREW FOR BEARING REPLACEMENT",
-      "INSPECT SECONDARY SHAFT FOR MISALIGNMENT"
-    ]
-  {"}"}
-{"}"}</code></pre>
-</div>
-
-<div className="p-md border-t border-outline-variant bg-surface">
-<div className="flex flex-col gap-sm mb-md h-32 overflow-y-auto">
-
-<div className="flex gap-sm items-start">
-<div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center shrink-0 border border-primary/30">
-<span className="material-symbols-outlined text-[14px] text-primary">smart_toy</span>
-</div>
-<div className="bg-surface-container-low p-sm rounded border border-outline-variant text-body-sm text-on-surface">
-                                    Analysis complete. The vibration signature strongly correlates with inner race bearing degradation. I recommend immediate scheduled downtime to prevent secondary damage to the main shaft.
-                                </div>
-</div>
-
-<div className="flex gap-sm items-start flex-row-reverse">
-<div className="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant">
-<span className="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>
-</div>
-<div className="bg-secondary-container/20 p-sm rounded border border-secondary/30 text-body-sm text-on-surface text-right">
-                                    Generate the maintenance work order and attach this diagnostic payload.
-                                </div>
-</div>
-</div>
-
-<div className="relative">
-<input className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface placeholder-on-surface-variant text-body-sm rounded pl-md pr-12 py-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Query AI assistant or enter command..." type="text"/>
-<button className="absolute right-sm top-1/2 -translate-y-1/2 text-primary hover:text-primary-container p-xs rounded transition-colors">
-<span className="material-symbols-outlined">send</span>
-</button>
-</div>
-</div>
-</div>
+<DiagnosticsRadarLight />
+<DiagnosticsTerminalLight />
 </div>
 </main>
 </div>
