@@ -2,6 +2,10 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
+import ParameterConfiguration from "./components/ParameterConfiguration";
+import SimulatedProjection from "./components/SimulatedProjection";
+import SimResultsPanel from "./components/SimResultsPanel";
+import SimEngineStats from "./components/SimEngineStats";
 
 export default function SimulationDark() {
   const { isAbnormal, setIsAbnormal, theme, setTheme } = useAppContext();
@@ -155,195 +159,15 @@ export default function SimulationDark() {
 <div className="p-margin-desktop space-y-gutter">
 <div className="grid grid-cols-12 gap-gutter">
 
-<section className="col-span-12 lg:col-span-4 glass-panel p-6 flex flex-col space-y-6">
-<div>
-<h2 className="font-label-caps text-label-caps text-primary border-l-2 border-primary pl-3 mb-2">PARAMETER CONFIGURATION</h2>
-<p className="text-on-surface-variant font-body-sm">Adjust system inputs to simulate hardware response profiles.</p>
-</div>
-
-<div className="space-y-3">
-<label className="font-label-caps text-[10px] text-on-surface-variant">SCENARIO PRESETS</label>
-<div className="flex flex-wrap gap-2">
-<button className="bg-primary-container/20 text-primary border border-primary/40 px-3 py-1.5 rounded font-label-caps text-[11px] hover:bg-primary/30 transition-all">MAX STRESS TEST</button>
-<button className="bg-white/5 text-on-surface-variant border border-white/10 px-3 py-1.5 rounded font-label-caps text-[11px] hover:bg-white/10">GRADUAL WEAR</button>
-<button className="bg-white/5 text-on-surface-variant border border-white/10 px-3 py-1.5 rounded font-label-caps text-[11px] hover:bg-white/10">OPTIMAL EFFICIENCY</button>
-</div>
-</div>
-
-<div className="space-y-5 flex-1">
-<div className="space-y-2">
-<div className="flex justify-between font-label-caps text-[10px]">
-<span className="text-on-surface">VIBRATION RMS</span>
-<span className="text-primary">8.4 / <span className="opacity-60">12.0 mm/s</span></span>
-</div>
-<input className="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer accent-primary-container" max="20" min="0" type="range" value="8" />
-</div>
-<div className="space-y-2">
-<div className="flex justify-between font-label-caps text-[10px]">
-<span className="text-on-surface">BEARING TEMPERATURE</span>
-<span className="text-primary">68.2 / <span className="opacity-60">95.0 °C</span></span>
-</div>
-<input className="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer accent-primary-container" max="150" min="0" type="range" value="68" />
-</div>
-<div className="space-y-2">
-<div className="flex justify-between font-label-caps text-[10px]">
-<span className="text-on-surface">INLET PRESSURE</span>
-<span className="text-primary">14.2 / <span className="opacity-60">18.0 BAR</span></span>
-</div>
-<input className="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer accent-primary-container" max="30" min="0" type="range" value="14" />
-</div>
-<div className="space-y-2">
-<div className="flex justify-between font-label-caps text-[10px]">
-<span className="text-on-surface">FLOW RATE</span>
-<span className="text-primary">850.0 / <span className="opacity-60">1200.0 L/M</span></span>
-</div>
-<input className="w-full h-1 bg-surface-container-highest appearance-none cursor-pointer accent-primary-container" max="2000" min="0" type="range" value="850" />
-</div>
-</div>
-<button className="w-full bg-primary-container text-on-primary py-4 font-label-caps text-label-caps tracking-[0.2em] shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:brightness-110 active:scale-[0.98] transition-all cyan-inner-glow relative overflow-hidden group">
-                        RUN SIMULATION
-                        <span className="absolute inset-0 bg-white/20 animate-pulse opacity-0 group-hover:opacity-100"></span>
-</button>
-</section>
+<ParameterConfiguration />
 
 <div className="col-span-12 lg:col-span-8 space-y-gutter">
-
-<div className="glass-panel p-6 min-h-[400px] flex flex-col">
-<div className="flex justify-between items-start mb-6">
-<div>
-<h2 className="font-label-caps text-label-caps text-primary border-l-2 border-primary pl-3">SIMULATED PROJECTION</h2>
-<p className="text-on-surface-variant text-[12px] mt-1">Predicted Operational Lifecycle (T-Minus Failure)</p>
-</div>
-<div className="text-right">
-<span className="font-data-lg text-headline-lg text-primary">14,204 HRS</span>
-<p className="font-label-caps text-[10px] text-on-surface-variant">ESTIMATED REMAINING UPTIME</p>
-</div>
-</div>
-<div className="flex-1 relative flex items-end gap-1"><svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 800 300">
-
-<defs>
-<pattern height="40" id="grid" patternUnits="userSpaceOnUse" width="40">
-<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.05)" strokeWidth="1" />
-</pattern>
-<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#00f0ff" stop-opacity="0.3"></stop>
-<stop offset="100%" stop-color="#00f0ff" stop-opacity="0"></stop>
-</linearGradient>
-<filter id="glow">
-<feGaussianBlur result="coloredBlur" stdDeviation="3"></feGaussianBlur>
-<feMerge>
-<feMergeNode in="coloredBlur"></feMergeNode>
-<feMergeNode in="SourceGraphic"></feMergeNode>
-</feMerge>
-</filter>
-</defs>
-<rect fill="url(#grid)" height="100%" width="100%" />
-
-<path d="M0,220 L100,200 L200,160 L300,180 L400,100 L500,60 L600,110 L700,150 L800,280 L800,300 L0,300 Z" fill="url(#chartGradient)" />
-
-<path d="M0,220 L100,200 L200,160 L300,180 L400,100 L500,60 L600,110 L700,150 L800,280" fill="none" filter="url(#glow)" stroke="#00f0ff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-
-<circle className="animate-pulse" cx="100" cy="200" fill="#00f0ff" r="3" />
-<circle cx="200" cy="160" fill="#00f0ff" r="3" />
-<circle cx="300" cy="180" fill="#00f0ff" r="3" />
-<circle cx="400" cy="100" fill="#00f0ff" r="3" />
-<circle cx="500" cy="60" fill="#00f0ff" r="3" />
-<circle cx="600" cy="110" fill="#00f0ff" r="3" />
-<circle cx="800" cy="280" fill="#ffb4ab" r="3" />
-</svg></div>
-<div className="mt-4 flex justify-between border-t border-white/5 pt-4">
-<div className="flex gap-6">
-<div>
-<p className="font-label-caps text-[9px] text-on-surface-variant">MODEL CONFIDENCE</p>
-<p className="font-data-sm text-primary">98.2%</p>
-</div>
-<div>
-<p className="font-label-caps text-[9px] text-on-surface-variant">LATENCY</p>
-<p className="font-data-sm text-primary">12ms</p>
-</div>
-</div>
-<div className="flex gap-2">
-<span className="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_5px_#00f0ff]"></span>
-<span className="w-2 h-2 rounded-full bg-white/20"></span>
-<span className="w-2 h-2 rounded-full bg-white/20"></span>
-</div>
+<SimulatedProjection />
+<SimResultsPanel />
 </div>
 </div>
 
-<div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-<div className="glass-panel p-6">
-<h3 className="font-label-caps text-label-caps text-on-surface mb-4">RISK MATRIX: STABILITY HEATMAP</h3>
-<div className="grid grid-cols-5 gap-1">
-
-<div className="risk-tile bg-surface-container-highest/40 border border-white/5"></div>
-<div className="risk-tile bg-surface-container-highest/40 border border-white/5"></div>
-<div className="risk-tile bg-primary/20 border border-primary/30"></div>
-<div className="risk-tile bg-primary/40 border border-primary/50"></div>
-<div className="risk-tile bg-primary/60 border border-primary/70"></div>
-<div className="risk-tile bg-surface-container-highest/40 border border-white/5"></div>
-<div className="risk-tile bg-primary/20 border border-primary/30"></div>
-<div className="risk-tile bg-primary/40 border border-primary/50"></div>
-<div className="risk-tile bg-primary/60 border border-primary/70"></div>
-<div className="risk-tile bg-secondary-container/40 border border-secondary/50"></div>
-<div className="risk-tile bg-primary/20 border border-primary/30"></div>
-<div className="risk-tile bg-primary/40 border border-primary/50"></div>
-<div className="risk-tile bg-primary/60 border border-primary/70"></div>
-<div className="risk-tile bg-secondary-container/60 border border-secondary/70"></div>
-<div className="risk-tile bg-error/40 border border-error/50"></div>
-<div className="risk-tile bg-primary/40 border border-primary/50"></div>
-<div className="risk-tile bg-primary/60 border border-primary/70"></div>
-<div className="risk-tile bg-secondary-container/60 border border-secondary/70"></div>
-<div className="risk-tile bg-error/60 border border-error/70 animate-pulse"></div>
-<div className="risk-tile bg-error border border-white/20 animate-pulse"></div>
-</div>
-<div className="mt-4 flex justify-between font-label-caps text-[9px] text-on-surface-variant">
-<span className="">MIN STRESS</span>
-<span className="">CRITICAL THRESHOLD</span>
-</div>
-</div>
-<div className="glass-panel p-6 flex flex-col justify-center text-center space-y-4">
-<div className="inline-flex mx-auto p-4 rounded-full bg-error/10 border border-error/20">
-<span className="material-symbols-outlined text-error text-[32px]">warning</span>
-</div>
-<div>
-<p className="font-label-caps text-label-caps text-error">ANOMALY DETECTED IN SIMULATION</p>
-<p className="text-on-surface-variant font-body-sm mt-1 px-4">Configuration 4-C leads to resonant oscillation in bearing housing. Failure likely within 48 hours of deployment.</p>
-</div>
-<button className="text-primary font-label-caps text-[11px] hover:underline">VIEW FAILURE REPORT</button>
-</div>
-</div>
-</div>
-</div>
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-<div className="glass-panel p-4 flex items-center gap-4">
-<div className="h-10 w-10 bg-primary/10 rounded flex items-center justify-center">
-<span className="material-symbols-outlined text-primary">memory</span>
-</div>
-<div>
-<p className="font-label-caps text-[10px] text-on-surface-variant">SIM ENGINE LOAD</p>
-<p className="font-data-sm text-on-surface">CORE-7: 42%</p>
-</div>
-</div>
-<div className="glass-panel p-4 flex items-center gap-4">
-<div className="h-10 w-10 bg-primary/10 rounded flex items-center justify-center">
-<span className="material-symbols-outlined text-primary">cloud_done</span>
-</div>
-<div>
-<p className="font-label-caps text-[10px] text-on-surface-variant">CLOUD SYNC</p>
-<p className="font-data-sm text-on-surface">LAST: 2M AGO</p>
-</div>
-</div>
-<div className="glass-panel p-4 flex items-center gap-4">
-<div className="h-10 w-10 bg-primary/10 rounded flex items-center justify-center">
-<span className="material-symbols-outlined text-primary">history</span>
-</div>
-<div>
-<p className="font-label-caps text-[10px] text-on-surface-variant">PREVIOUS ITERATION</p>
-<p className="font-data-sm text-on-surface">V.4.2.1-STABLE</p>
-</div>
-</div>
-</div>
+<SimEngineStats />
 </div>
 </main>
 
