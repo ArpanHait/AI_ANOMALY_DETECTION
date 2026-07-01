@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DiagnosticTerminal() {
   return (
-    <section className="flex-1 bg-surface-container flex flex-col overflow-hidden relative border-t-2 border-primary border-l border-l-outline-variant">
+    <section className="w-full md:w-auto flex-1 bg-surface-container flex flex-col overflow-hidden relative border-t-2 border-primary border-l-0 md:border-l border-l-outline-variant min-h-[450px] md:min-h-0">
       {/* Terminal Header */}
       <div className="px-6 py-4 border-b border-outline-variant bg-[#ffffff] flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">

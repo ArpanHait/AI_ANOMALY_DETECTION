@@ -3,8 +3,8 @@ import React from "react";
 export default function ParameterGridLight() {
   return (
     <>
-      {/* Parameter Grid */}
-      <div className="grid grid-cols-3 gap-1 h-[22%]">
+      {/* Parameter Grid Row 1 */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 h-auto md:h-[22%]">
         <div
           className="glass-panel rounded-xl p-4 flex flex-col justify-between"
           style={{ background: "#ffffff", border: "1px solid #dee3e4" }}
@@ -92,7 +92,7 @@ export default function ParameterGridLight() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-1 h-[18%]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 h-auto md:h-[18%]">
         {/* Container 4: RPM */}
         <div
           className="glass-panel rounded-xl p-4 flex flex-col justify-between"

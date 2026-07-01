@@ -4,14 +4,15 @@ import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 import TelemetryChartsDark from "./components/TelemetryChartsDark";
 import TelemetryStatsDark from "./components/TelemetryStatsDark";
+import BottomNavbar from "@/components/layout/BottomNavbar";
 
 export default function TelemetryDark() {
   const { theme, setTheme } = useAppContext();
 
   return (
-    <div className="dashboard-dark-theme min-h-screen font-body text-on-surface bg-surface-container-lowest">
+    <div className="dashboard-dark-theme min-h-screen font-body text-on-surface bg-[#0A0E17] flex flex-col md:flex-row overflow-x-hidden">
       {/* Side Navigation Shell */}
-      <aside className="h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest/30 backdrop-blur-xl border-r border-outline-variant/10 flex flex-col py-gutter px-4 z-50">
+      <aside className="hidden md:flex h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest/30 backdrop-blur-xl border-r border-outline-variant/10 flex-col py-6 px-4 z-50">
         <div className="mb-10 mt-4">
           <Link href="/" className="font-headline text-3xl font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] tracking-tighter block">
             CORE<div>INSIGHT</div>
@@ -67,39 +68,42 @@ export default function TelemetryDark() {
       </aside>
 
       {/* Top AppBar Shell */}
-      <header className="fixed top-0 left-[15%] right-0 h-16 bg-surface/10 backdrop-blur-md border-b border-outline-variant/5 flex items-center justify-between px-6 z-40">
-        <div className="flex items-center gap-8 flex-1">
-          <h2 className="font-headline text-2xl font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)]">INSIGHT MONITOR</h2>
-          <div className="flex gap-6 flex-1 justify-center">
+      <header className="fixed top-0 left-0 md:left-[15%] right-0 h-16 bg-surface/10 backdrop-blur-md border-b border-outline-variant/5 flex items-center justify-between px-6 z-40 w-full md:w-[calc(100%-15%)]">
+        <div className="flex items-center justify-between flex-1 gap-2 md:gap-8">
+          <h2 className="font-headline text-lg md:text-2xl font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)]">INSIGHT MONITOR</h2>
+          <div className="hidden md:flex gap-6 flex-1 justify-center">
             <a className="font-mono text-[11px] font-bold uppercase text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] border-b-2 border-[#64ffda] pb-1 transition-all duration-200 ease-in-out" href="#">Real-time</a>
             <a className="font-mono text-[11px] font-bold uppercase text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out" href="#">History</a>
             <a className="font-mono text-[11px] font-bold uppercase text-on-surface-variant hover:text-primary transition-all duration-200 ease-in-out" href="#">Nodes</a>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <button className="bg-error-container/20 text-error border border-error/30 px-4 py-2 font-mono text-[11px] font-bold rounded hover:bg-error-container/40 transition-colors">
-            EMERGENCY SHUTDOWN
+        <div className="flex items-center gap-2 md:gap-6 pl-2">
+          <button className="bg-error-container/20 text-error border border-error/30 px-2 md:px-4 py-1.5 md:py-2 font-mono text-[9px] md:text-[11px] font-bold rounded hover:bg-error-container/40 transition-colors uppercase whitespace-nowrap">
+            <span className="hidden sm:inline">Emergency Shutdown</span>
+            <span className="inline sm:hidden">Stop</span>
           </button>
-          <div className="flex items-center gap-4 text-on-surface-variant">
-            <Link href="/">
+
+          <div className="flex items-center gap-2 md:gap-4 text-on-surface-variant">
+            <Link href="/" aria-label="Home">
               <span className="material-symbols-outlined cursor-pointer hover:text-primary flex items-center pt-1">home</span>
             </Link>
             <span 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="material-symbols-outlined cursor-pointer hover:text-primary flex items-center"
+              aria-label="Toggle theme"
             >
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>
-            <span className="material-symbols-outlined cursor-pointer hover:text-primary">notifications</span>
-            <span className="material-symbols-outlined cursor-pointer hover:text-primary">account_circle</span>
+            <span className="material-symbols-outlined cursor-pointer hover:text-primary" aria-label="Notifications">notifications</span>
+            <span className="material-symbols-outlined cursor-pointer hover:text-primary" aria-label="Account">account_circle</span>
           </div>
         </div>
       </header>
 
       {/* Main Telemetry Stage */}
-      <main className="ml-[15%] mt-16 p-4 h-[calc(100vh-64px)] overflow-hidden flex flex-col gap-1">
+      <main className="ml-0 md:ml-[15%] mt-16 p-4 h-auto min-h-[calc(100vh-64px)] pb-24 md:pb-4 overflow-y-auto md:overflow-hidden flex flex-col gap-1 w-full">
         {/* Top Action Bar */}
-        <div className="glass-panel flex items-center justify-between px-6 py-3 rounded-t-xl" style={{ background: "rgba(255, 255, 255, 0.03)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
+        <div className="glass-panel flex flex-col sm:flex-row items-start sm:items-center justify-between px-6 py-3 rounded-t-xl gap-3 sm:gap-0" style={{ background: "rgba(255, 255, 255, 0.03)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
           <div className="flex items-center gap-4">
             <div className="px-3 py-1 bg-[#64ffda]/10 border border-[#64ffda]/30 rounded">
               <span className="font-mono text-[12px] text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] tracking-widest font-bold">ASSET ID: ST-049</span>
@@ -107,7 +111,7 @@ export default function TelemetryDark() {
             <span className="text-on-surface-variant font-medium">|</span>
             <span className="font-headline text-lg text-on-surface font-semibold">Motor Array Beta</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
             <div className="flex bg-surface-container-low rounded p-0.5 border border-outline-variant/10">
               <button className="px-3 py-1 font-mono text-[10px] text-on-surface-variant hover:text-primary font-bold">1 MIN</button>
               <button className="px-3 py-1 font-mono text-[10px] text-on-surface-variant hover:text-primary font-bold">5 MIN</button>
@@ -126,11 +130,18 @@ export default function TelemetryDark() {
         </div>
 
         {/* Upper Section: Charts (60% Height) */}
-        <TelemetryChartsDark />
+        <div className="w-full">
+          <TelemetryChartsDark />
+        </div>
 
         {/* Lower Section: Telemetry Grid (40% Height) */}
-        <TelemetryStatsDark />
+        <div className="w-full">
+          <TelemetryStatsDark />
+        </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNavbar />
     </div>
   );
 }

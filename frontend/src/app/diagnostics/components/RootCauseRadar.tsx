@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RootCauseRadar() {
   return (
-    <aside className="w-[30%] min-w-[320px] flex flex-col gap-4 overflow-y-auto pb-8 px-6 pt-6 border-r border-outline-variant">
+    <aside className="w-full md:w-[30%] min-w-0 md:min-w-[320px] flex flex-col gap-4 pb-8 px-6 pt-6 border-b md:border-b-0 md:border-r border-outline-variant">
       <h2 className="font-headline text-2xl text-on-surface flex items-center gap-2 mb-2">
         <span className="material-symbols-outlined text-primary">radar</span>
         Root Cause Radar

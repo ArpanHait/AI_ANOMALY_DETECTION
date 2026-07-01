@@ -3,7 +3,7 @@ import React from "react";
 export default function SensorTrendsDark() {
   return (
     <div
-      className="glass-panel flex-grow rounded-xl p-6 flex flex-col"
+      className="glass-panel flex-grow rounded-xl p-6 flex flex-col min-h-[250px] md:min-h-0"
       style={{
         background: "rgba(255, 255, 255, 0.03)",
         backdropFilter: "blur(12px)",

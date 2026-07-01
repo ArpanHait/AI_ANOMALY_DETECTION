@@ -3,7 +3,7 @@ import React from "react";
 export default function SensorTrendsLight() {
   return (
     <div
-      className="glass-panel flex-grow rounded-xl p-6 flex flex-col"
+      className="glass-panel flex-grow rounded-xl p-6 flex flex-col min-h-[250px] md:min-h-0"
       style={{ background: "#ffffff", border: "1px solid #dee3e4" }}
     >
       <div className="font-mono text-[11px] font-bold text-on-surface-variant mb-4 uppercase">

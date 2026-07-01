@@ -2,10 +2,10 @@ import React from "react";
 
 export default function RcaNarrativeLight() {
   return (
-    <div className="flex-[30%] flex flex-col gap-1">
+    <div className="w-full md:w-auto md:flex-[30%] flex flex-col gap-1">
       {/* RCA Narrative */}
       <div
-        className="glass-panel flex-[40%] rounded-xl p-6 border-l-4 border-l-secondary"
+        className="glass-panel flex-none md:flex-[40%] rounded-xl p-6 border-l-4 border-l-secondary"
         style={{
           background: "#ffffff",
           border: "1px solid #dee3e4",
@@ -39,7 +39,7 @@ export default function RcaNarrativeLight() {
       </div>
       {/* Recommended Action */}
       <div
-        className="glass-panel flex-[25%] rounded-xl p-6 bg-error-container/50 border border-error/50 flex flex-col justify-center"
+        className="glass-panel flex-none md:flex-[25%] rounded-xl p-6 bg-error-container/50 border border-error/50 flex flex-col justify-center"
         style={{
           background: "rgba(255, 218, 214, 0.5)",
           border: "1px solid rgba(186, 26, 26, 0.5)",
@@ -66,7 +66,7 @@ export default function RcaNarrativeLight() {
       </div>
       {/* Simulation Lab */}
       <div
-        className="glass-panel flex-[35%] rounded-xl p-6"
+        className="glass-panel flex-none md:flex-[35%] rounded-xl p-6"
         style={{ background: "#ffffff", border: "1px solid #dee3e4" }}
       >
         <div className="font-mono text-[11px] font-bold text-primary mb-4 flex items-center space-x-2 uppercase">

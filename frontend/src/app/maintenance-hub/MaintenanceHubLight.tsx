@@ -6,14 +6,15 @@ import ActiveWorkOrders from "./components/ActiveWorkOrders";
 import InventoryStatus from "./components/InventoryStatus";
 import AssetVisualizer from "./components/AssetVisualizer";
 import DowntimeWindows from "./components/DowntimeWindows";
+import BottomNavbar from "@/components/layout/BottomNavbar";
 
 export default function MaintenanceHubLight() {
   const { theme, setTheme } = useAppContext();
 
   return (
-    <div className="dashboard-light-theme font-body min-h-screen flex overflow-hidden bg-[#f4f9f9] text-[#151d1e]">
+    <div className="dashboard-light-theme font-body min-h-screen flex flex-col md:flex-row overflow-x-hidden bg-[#f4f9f9] text-[#151d1e]">
       {/* Side Navigation Shell */}
-      <nav className="h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-4 px-4 z-50">
+      <nav className="hidden md:flex h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex-col py-6 px-4 z-50">
         <div className="mb-8 mt-4">
           <Link href="/">
             <h1 className="font-headline text-3xl font-bold text-on-surface tracking-tighter uppercase">CORE<div>INSIGHT</div></h1>
@@ -69,10 +70,10 @@ export default function MaintenanceHubLight() {
       </nav>
 
       {/* Top AppBar Shell */}
-      <header className="fixed top-0 left-[15%] h-16 bg-white/95 backdrop-blur-sm border-b border-outline-variant flex items-center justify-between px-6 z-40 transition-all duration-200" style={{ width: "calc(100% - 15%)" }}>
+      <header className="fixed top-0 left-0 md:left-[15%] right-0 h-16 bg-white/95 backdrop-blur-sm border-b border-outline-variant flex items-center justify-between px-6 z-40 transition-all duration-200 w-full md:w-[calc(100%-15%)]">
         {/* Branding Left */}
-        <div className="flex flex-col">
-          <h2 className="font-mono text-[18px] font-bold text-[#006970] tracking-tight leading-none uppercase">Insight Monitor</h2>
+        <div className="flex flex-col min-w-[120px] md:min-w-[200px]">
+          <h2 className="font-mono text-sm md:text-[18px] font-bold text-[#006970] tracking-tight leading-none uppercase">Insight Monitor</h2>
         </div>
 
         {/* Navigation Center */}
@@ -83,25 +84,27 @@ export default function MaintenanceHubLight() {
         </nav>
 
         {/* Actions Right */}
-        <div className="flex items-center space-x-4">
-          <button className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] font-mono text-[10px] px-4 py-1.5 rounded-sm hover:bg-red-200 transition-colors uppercase font-bold tracking-wider">
-            EMERGENCY SHUTDOWN
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <button className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] font-mono text-[9px] md:text-[10px] px-2 md:px-4 py-1.5 rounded-sm hover:bg-red-200 transition-colors uppercase font-bold tracking-wider">
+            <span className="hidden sm:inline">Emergency Shutdown</span>
+            <span className="inline sm:hidden">Stop</span>
           </button>
-          <div className="flex items-center space-x-3 text-on-surface-variant">
-            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center">
+          <div className="flex items-center space-x-2 md:space-x-3 text-on-surface-variant">
+            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Home">
               <span className="material-symbols-outlined text-[20px]">home</span>
             </Link>
             <button 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="hover:text-primary transition-colors p-1"
+              className="hover:text-primary transition-colors p-1 flex items-center"
+              aria-label="Toggle theme"
             >
               <span className="material-symbols-outlined text-[20px]">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
             </button>
-            <button className="hover:text-primary transition-colors p-1 relative">
+            <button className="hover:text-primary transition-colors p-1 relative flex items-center" aria-label="Notifications">
               <span className="material-symbols-outlined text-[20px]">notifications</span>
               <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full"></span>
             </button>
-            <button className="hover:text-primary transition-colors p-1">
+            <button className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Account">
               <span className="material-symbols-outlined text-[22px]">account_circle</span>
             </button>
           </div>
@@ -109,7 +112,7 @@ export default function MaintenanceHubLight() {
       </header>
 
       {/* Main Content Area */}
-      <main className="ml-[15%] pt-20 md:pt-24 min-h-screen w-full flex-1 px-4 pb-4 md:px-8 md:pb-8 overflow-y-auto grid grid-cols-12 gap-4 relative">
+      <main className="ml-0 md:ml-[15%] pt-20 md:pt-24 min-h-screen pb-24 md:pb-8 w-full flex-1 px-4 md:px-8 overflow-y-auto grid grid-cols-12 gap-4 relative">
         <style>{`
           .critical-pulse { animation: pulse-critical-light 2s infinite; }
           @keyframes pulse-critical-light {
@@ -119,16 +122,16 @@ export default function MaintenanceHubLight() {
           }
         `}</style>
         {/* Page Header & Actions */}
-        <div className="col-span-12 flex justify-between items-end mb-4">
+        <div className="col-span-12 flex flex-col sm:flex-row justify-between items-start sm:items-end mb-4 gap-3 sm:gap-0">
           <div>
-            <h1 className="font-headline text-3xl font-bold text-primary">Maintenance Hub</h1>
-            <p className="font-mono text-[12px] text-on-surface-variant mt-1">System Status: OPTIMAL | Last sync: 0.2s ago</p>
+            <h1 className="font-headline text-2xl md:text-3xl font-bold text-primary">Maintenance Hub</h1>
+            <p className="font-mono text-[11px] md:text-[12px] text-on-surface-variant mt-1">System Status: OPTIMAL | Last sync: 0.2s ago</p>
           </div>
-          <div className="flex gap-4">
-            <button className="bg-transparent border border-primary text-primary font-mono text-[11px] font-bold uppercase tracking-widest py-2 px-6 rounded hover:bg-primary/5 transition-colors flex items-center gap-2">
+          <div className="flex flex-wrap gap-2 md:gap-4 w-full sm:w-auto">
+            <button className="flex-1 sm:flex-none justify-center bg-transparent border border-primary text-primary font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest py-2 px-4 md:px-6 rounded hover:bg-primary/5 transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">shopping_cart</span> Order Parts
             </button>
-            <button className="bg-primary text-on-primary font-mono text-[11px] font-bold uppercase tracking-widest py-2 px-6 rounded hover:brightness-110 transition-all flex items-center gap-2">
+            <button className="flex-1 sm:flex-none justify-center bg-primary text-on-primary font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-widest py-2 px-4 md:px-6 rounded hover:brightness-110 transition-all flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">add_task</span> Initiate Work Order
             </button>
           </div>
@@ -146,6 +149,9 @@ export default function MaintenanceHubLight() {
           <DowntimeWindows />
         </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNavbar />
     </div>
   );
 }

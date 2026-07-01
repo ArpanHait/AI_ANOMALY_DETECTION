@@ -11,3 +11,4 @@ logs/
 *.pyd
 db.sqlite3
 venv
+walkthrough_mobile.md

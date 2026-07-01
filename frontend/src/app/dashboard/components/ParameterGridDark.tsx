@@ -4,7 +4,7 @@ export default function ParameterGridDark() {
   return (
     <>
       {/* Parameter Grid Row 1 */}
-      <div className="grid grid-cols-3 gap-1 h-[22%]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 h-auto md:h-[22%]">
         <div
           className="glass-panel rounded-xl p-4 flex flex-col justify-between"
           style={{
@@ -105,7 +105,7 @@ export default function ParameterGridDark() {
       </div>
 
       {/* Parameter Grid Row 2 */}
-      <div className="grid grid-cols-3 gap-1 h-[18%]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 h-auto md:h-[18%]">
         <div
           className="glass-panel rounded-xl p-4 flex flex-col justify-between"
           style={{

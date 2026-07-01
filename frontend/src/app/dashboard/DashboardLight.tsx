@@ -6,14 +6,15 @@ import OverviewGaugesLight from "./components/OverviewGaugesLight";
 import ParameterGridLight from "./components/ParameterGridLight";
 import SensorTrendsLight from "./components/SensorTrendsLight";
 import RcaNarrativeLight from "./components/RcaNarrativeLight";
+import BottomNavbar from "@/components/layout/BottomNavbar";
 
 export default function DashboardLight() {
   const { theme, setTheme } = useAppContext();
 
   return (
-    <div className="dashboard-light-theme min-h-screen flex overflow-hidden font-body">
+    <div className="dashboard-light-theme min-h-screen flex flex-col md:flex-row overflow-x-hidden font-body bg-[#f4f9f9] text-[#151d1e]">
       {/* SideNavBar */}
-      <nav className="h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-gutter px-4 z-50">
+      <nav className="hidden md:flex h-screen w-[15%] fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex-col py-6 px-4 z-50">
         <div className="mb-8 mt-4">
           <Link href="/" className="font-headline text-3xl font-bold text-primary tracking-tighter block">
             CORE<div>INSIGHT</div>
@@ -92,11 +93,11 @@ export default function DashboardLight() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="ml-[15%] flex-grow flex h-screen pt-16 pb-4 px-4 gap-1">
+      <main className="ml-0 md:ml-[15%] flex-grow flex flex-col md:flex-row h-auto min-h-screen md:h-screen pt-16 pb-24 md:pb-4 px-4 gap-1 overflow-y-auto md:overflow-hidden">
         {/* TopAppBar */}
-        <header className="fixed top-0 left-[15%] right-0 h-16 z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-4 transition-all duration-200 ease-in-out">
-          <div className="flex items-center min-w-[240px]">
-            <div className="font-headline text-2xl font-bold text-primary">
+        <header className="fixed top-0 left-0 md:left-[15%] right-0 h-16 z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-4 transition-all duration-200 ease-in-out">
+          <div className="flex items-center min-w-[120px] md:min-w-[240px]">
+            <div className="font-headline text-lg md:text-2xl font-bold text-primary">
               INSIGHT MONITOR
             </div>
           </div>
@@ -111,41 +112,49 @@ export default function DashboardLight() {
               Nodes
             </a>
           </nav>
-          <div className="flex items-center space-x-4 min-w-[240px] justify-end">
-            <button className="bg-error-container border border-error text-on-error-container font-mono text-xs font-bold px-4 py-2 rounded hover:bg-error hover:text-on-error transition-colors whitespace-nowrap">
-              EMERGENCY SHUTDOWN
+          <div className="flex items-center space-x-2 md:space-x-4 min-w-[120px] md:min-w-[240px] justify-end">
+            <button className="bg-error-container border border-error text-on-error-container font-mono text-[9px] md:text-xs font-bold px-2 md:px-4 py-1.5 md:py-2 rounded hover:bg-error hover:text-on-error transition-colors uppercase">
+              <span className="hidden sm:inline">Emergency Shutdown</span>
+              <span className="inline sm:hidden">Stop</span>
             </button>
             <Link href="/">
-              <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center pt-1">
+              <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center pt-1" aria-label="Home">
                 <span className="material-symbols-outlined">home</span>
               </button>
             </Link>
             <button 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center"
+              aria-label="Toggle theme"
             >
               <span className="material-symbols-outlined">
                 {theme === 'dark' ? 'light_mode' : 'dark_mode'}
               </span>
             </button>
-            <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+            <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center" aria-label="Notifications">
               <span className="material-symbols-outlined">notifications</span>
             </button>
-            <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+            <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center" aria-label="Account">
               <span className="material-symbols-outlined">account_circle</span>
             </button>
           </div>
         </header>
 
         {/* Center Stage (55%) */}
-        <div className="flex-[55%] flex flex-col gap-1">
+        <div className="flex-[55%] flex flex-col gap-1 w-full">
           <OverviewGaugesLight />
           <ParameterGridLight />
           <SensorTrendsLight />
         </div>
 
-        <RcaNarrativeLight />
+        {/* Right Pane */}
+        <div className="w-full md:w-auto">
+          <RcaNarrativeLight />
+        </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNavbar />
     </div>
   );
 }

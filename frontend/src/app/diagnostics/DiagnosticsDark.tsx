@@ -4,14 +4,15 @@ import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 import DiagnosticsRadarDark from "./components/DiagnosticsRadarDark";
 import DiagnosticsTerminalDark from "./components/DiagnosticsTerminalDark";
+import BottomNavbar from "@/components/layout/BottomNavbar";
 
 export default function DiagnosticsDark() {
   const { theme, setTheme } = useAppContext();
 
   return (
-    <div className="dashboard-dark-theme font-body min-h-screen flex overflow-hidden bg-[#0A0E17] text-on-surface">
+    <div className="dashboard-dark-theme font-body min-h-screen flex flex-col md:flex-row overflow-x-hidden bg-[#0A0E17] text-on-surface">
       {/* Side Navigation Shell */}
-      <nav className="h-screen w-[15%] fixed left-0 top-0 bg-surface-container-low/40 backdrop-blur-xl border-r border-outline-variant/10 flex flex-col py-gutter px-4 z-50">
+      <nav className="hidden md:flex h-screen w-[15%] fixed left-0 top-0 bg-surface-container-low/40 backdrop-blur-xl border-r border-outline-variant/10 flex-col py-6 px-4 z-50">
         <div className="mb-8 mt-4">
           <Link href="/">
             <h1 className="font-headline text-3xl font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] tracking-tighter uppercase">CORE<div>INSIGHT</div></h1>
@@ -65,10 +66,10 @@ export default function DiagnosticsDark() {
       </nav>
 
       {/* Top AppBar Shell */}
-      <header className="fixed top-0 left-[15%] h-16 bg-surface-container/30 backdrop-blur-xl border-b border-outline-variant/20 flex items-center justify-between px-6 z-40 transition-all duration-200" style={{ width: "calc(100% - 15%)" }}>
+      <header className="fixed top-0 left-0 md:left-[15%] right-0 h-16 bg-surface-container/30 backdrop-blur-xl border-b border-outline-variant/20 flex items-center justify-between px-6 z-40 transition-all duration-200 w-full md:w-[calc(100%-15%)]">
         {/* Branding Left */}
-        <div className="flex flex-col">
-          <h2 className="font-mono text-[18px] font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] tracking-widest uppercase">Insight Monitor</h2>
+        <div className="flex flex-col min-w-[120px] md:min-w-[200px]">
+          <h2 className="font-mono text-sm md:text-[18px] font-bold text-[#64ffda] drop-shadow-[0_0_4px_rgba(100,255,218,0.4)] tracking-widest uppercase">Insight Monitor</h2>
         </div>
 
         {/* Navigation Center */}
@@ -79,25 +80,27 @@ export default function DiagnosticsDark() {
         </nav>
 
         {/* Actions Right */}
-        <div className="flex items-center space-x-4">
-          <button className="bg-[#1a0a0a] border border-[#441d1d] text-[#ffb4ab] font-mono text-[10px] px-4 py-1.5 rounded-sm hover:bg-[#2a1111] transition-colors uppercase font-bold tracking-wider">
-            EMERGENCY SHUTDOWN
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <button className="bg-[#1a0a0a] border border-[#441d1d] text-[#ffb4ab] font-mono text-[9px] md:text-[10px] px-2 md:px-4 py-1.5 rounded-sm hover:bg-[#2a1111] transition-colors uppercase font-bold tracking-wider">
+            <span className="hidden sm:inline">Emergency Shutdown</span>
+            <span className="inline sm:hidden">Stop</span>
           </button>
-          <div className="flex items-center space-x-3 text-on-surface-variant">
-            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center">
+          <div className="flex items-center space-x-2 md:space-x-3 text-on-surface-variant">
+            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Home">
               <span className="material-symbols-outlined text-[20px]">home</span>
             </Link>
             <button 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="hover:text-primary transition-colors p-1 flex items-center"
+              aria-label="Toggle theme"
             >
               <span className="material-symbols-outlined text-[20px]">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
             </button>
-            <button className="hover:text-primary transition-colors p-1 relative flex items-center">
+            <button className="hover:text-primary transition-colors p-1 relative flex items-center" aria-label="Notifications">
               <span className="material-symbols-outlined text-[20px]">notifications</span>
               <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full"></span>
             </button>
-            <button className="hover:text-primary transition-colors p-1 flex items-center">
+            <button className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Account">
               <span className="material-symbols-outlined text-[22px]">account_circle</span>
             </button>
           </div>
@@ -105,13 +108,16 @@ export default function DiagnosticsDark() {
       </header>
 
       {/* Main Content Area */}
-      <main className="ml-[15%] mt-16 flex-1 flex overflow-hidden w-full h-[calc(100vh-64px)]">
+      <main className="ml-0 md:ml-[15%] mt-16 flex-grow flex flex-col md:flex-row h-auto min-h-[calc(100vh-64px)] pb-24 md:pb-0 overflow-y-auto md:overflow-hidden w-full">
         {/* Left Pane: Root Cause Radar (30%) */}
         <DiagnosticsRadarDark />
 
         {/* Right Pane: AI Diagnostic Terminal (70%) */}
         <DiagnosticsTerminalDark />
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNavbar />
     </div>
   );
 }

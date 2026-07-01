@@ -3,7 +3,7 @@ import React from "react";
 export default function DiagnosticsTerminalDark() {
   return (
     <section
-      className="flex-1 glass-panel flex flex-col overflow-hidden relative border-t border-[#64ffda]/20 border-l border-l-outline-variant/10 rounded-none"
+      className="w-full md:w-auto flex-1 glass-panel flex flex-col overflow-hidden relative border-t border-[#64ffda]/20 border-l-0 md:border-l border-l-outline-variant/10 rounded-none min-h-[450px] md:min-h-0"
       style={{ background: "rgba(255, 255, 255, 0.03)", backdropFilter: "blur(12px)" }}
     >
       {/* Terminal Header */}

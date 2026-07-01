@@ -32,9 +32,16 @@ export default function Home() {
     const brandColor = computedStyle.getPropertyValue('--particle-glow').trim() || (theme === 'dark' ? '#00e55b' : '#dae2fd');
     const outlineColor = computedStyle.getPropertyValue('--particle-outline').trim() || (theme === 'dark' ? '#3b4b3a' : '#c6c6cd');
 
-    let animationFrameId: number;
+    let animationFrameId: number = 0;
 
     function init() {
+      if (window.innerWidth < 768) {
+        if (ctx && canvas) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        window.addEventListener("resize", resize);
+        return;
+      }
       resize();
       window.addEventListener("resize", resize);
       window.addEventListener("mousemove", onMouseMove);
@@ -50,7 +57,24 @@ export default function Home() {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      createParticles();
+      
+      if (width < 768) {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+        if (ctx) {
+          ctx.clearRect(0, 0, width, height);
+        }
+        window.removeEventListener("mousemove", onMouseMove);
+      } else {
+        createParticles();
+        window.removeEventListener("mousemove", onMouseMove);
+        window.addEventListener("mousemove", onMouseMove);
+        if (!animationFrameId) {
+          animate();
+        }
+      }
     }
 
     function createParticles() {
@@ -95,7 +119,9 @@ export default function Home() {
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, [theme]); // Re-run when theme changes so particles get new colors
 

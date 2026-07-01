@@ -4,14 +4,15 @@ import Link from "next/link";
 import { useAppContext } from "@/components/AppContext";
 import TelemetryChartsLight from "./components/TelemetryChartsLight";
 import TelemetryStatsLight from "./components/TelemetryStatsLight";
+import BottomNavbar from "@/components/layout/BottomNavbar";
 
 export default function TelemetryLight() {
   const { theme, setTheme } = useAppContext();
 
   return (
-    <div className="dashboard-light-theme font-body min-h-screen flex overflow-hidden bg-[#f4f9f9] text-[#151d1e]">
+    <div className="dashboard-light-theme font-body min-h-screen flex flex-col md:flex-row overflow-x-hidden bg-[#f4f9f9] text-[#151d1e]">
       {/* Side Navigation Shell */}
-      <nav className="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-gutter px-4 z-50">
+      <nav className="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex-col py-6 px-4 z-50">
         <div className="mb-8 mt-4">
           <Link href="/">
             <h1 className="font-headline text-3xl font-bold text-on-surface tracking-tighter uppercase">CORE<div>INSIGHT</div></h1>
@@ -67,10 +68,10 @@ export default function TelemetryLight() {
       </nav>
 
       {/* Top AppBar Shell */}
-      <header className="fixed top-0 left-64 h-16 bg-white/95 backdrop-blur-sm border-b border-outline-variant flex items-center justify-between px-6 z-40 transition-all duration-200" style={{ width: "calc(100% - 16rem)" }}>
+      <header className="fixed top-0 left-0 md:left-64 right-0 h-16 bg-white/95 backdrop-blur-sm border-b border-outline-variant flex items-center justify-between px-6 z-40 transition-all duration-200 w-full md:w-[calc(100%-16rem)]">
         {/* Branding Left */}
-        <div className="flex flex-col">
-          <h2 className="font-mono text-[18px] font-bold text-[#006970] tracking-tight leading-none uppercase">Insight Monitor</h2>
+        <div className="flex flex-col min-w-[120px] md:min-w-[200px]">
+          <h2 className="font-mono text-sm md:text-[18px] font-bold text-[#006970] tracking-tight leading-none uppercase">Insight Monitor</h2>
         </div>
 
         {/* Navigation Center */}
@@ -81,25 +82,27 @@ export default function TelemetryLight() {
         </nav>
 
         {/* Actions Right */}
-        <div className="flex items-center space-x-4">
-          <button className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] font-mono text-[10px] px-4 py-1.5 rounded-sm hover:bg-red-200 transition-colors uppercase font-bold tracking-wider">
-            EMERGENCY SHUTDOWN
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <button className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] font-mono text-[9px] md:text-[10px] px-2 md:px-4 py-1.5 rounded-sm hover:bg-red-200 transition-colors uppercase font-bold tracking-wider">
+            <span className="hidden sm:inline">Emergency Shutdown</span>
+            <span className="inline sm:hidden">Stop</span>
           </button>
-          <div className="flex items-center space-x-3 text-on-surface-variant">
-            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center">
+          <div className="flex items-center space-x-2 md:space-x-3 text-on-surface-variant">
+            <Link href="/" className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Home">
               <span className="material-symbols-outlined text-[20px]">home</span>
             </Link>
             <button 
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="hover:text-primary transition-colors p-1"
+              className="hover:text-primary transition-colors p-1 flex items-center"
+              aria-label="Toggle theme"
             >
               <span className="material-symbols-outlined text-[20px]">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
             </button>
-            <button className="hover:text-primary transition-colors p-1 relative">
+            <button className="hover:text-primary transition-colors p-1 relative flex items-center" aria-label="Notifications">
               <span className="material-symbols-outlined text-[20px]">notifications</span>
               <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full"></span>
             </button>
-            <button className="hover:text-primary transition-colors p-1">
+            <button className="hover:text-primary transition-colors p-1 flex items-center" aria-label="Account">
               <span className="material-symbols-outlined text-[22px]">account_circle</span>
             </button>
           </div>
@@ -107,9 +110,9 @@ export default function TelemetryLight() {
       </header>
 
       {/* Main Telemetry Stage */}
-      <main className="mt-16 p-6 h-[calc(100vh-64px)] overflow-hidden flex flex-col gap-6 w-full" style={{ marginLeft: "16rem", width: "calc(100% - 16rem)" }}>
+      <main className="ml-0 md:ml-64 mt-16 p-6 h-auto min-h-[calc(100vh-64px)] pb-24 md:pb-6 overflow-y-auto md:overflow-hidden flex flex-col gap-6 w-full">
         {/* Top Action Bar */}
-        <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] flex items-center justify-between px-6 py-4 rounded-xl">
+        <div className="bg-[#ffffff] border border-[#dee3e4] shadow-[0_1px_3px_rgba(0,0,0,0.05)] flex flex-col sm:flex-row items-start sm:items-center justify-between px-6 py-4 rounded-xl gap-3 sm:gap-0">
           <div className="flex items-center gap-4">
             <div className="px-3 py-1 bg-primary-container/30 border border-primary-container rounded">
               <span className="font-mono text-[12px] text-primary tracking-widest uppercase font-bold">ASSET ID: ST-049</span>
@@ -117,7 +120,7 @@ export default function TelemetryLight() {
             <span className="text-outline-variant font-medium">|</span>
             <span className="font-headline text-2xl text-on-surface font-semibold">Motor Array Beta</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
             <div className="flex bg-surface-container rounded p-1 border border-outline-variant">
               <button className="px-3 py-1 font-mono text-[10px] text-on-surface-variant hover:text-on-surface rounded font-bold">1 MIN</button>
               <button className="px-3 py-1 font-mono text-[10px] text-on-surface-variant hover:text-on-surface rounded font-bold">5 MIN</button>
@@ -136,11 +139,18 @@ export default function TelemetryLight() {
         </div>
 
         {/* Upper Section: Charts (60% Height) */}
-        <TelemetryChartsLight />
+        <div className="w-full">
+          <TelemetryChartsLight />
+        </div>
 
         {/* Lower Section: Telemetry Grid (40% Height) */}
-        <TelemetryStatsLight />
+        <div className="w-full">
+          <TelemetryStatsLight />
+        </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNavbar />
     </div>
   );
 }

@@ -2,10 +2,10 @@ import React from "react";
 
 export default function RcaNarrativeDark() {
   return (
-    <div className="flex-[30%] flex flex-col gap-1">
+    <div className="w-full md:w-auto md:flex-[30%] flex flex-col gap-1">
       {/* RCA Narrative */}
       <div
-        className="glass-panel flex-[40%] rounded-xl p-6 border-l-4 border-l-secondary-fixed-dim"
+        className="glass-panel flex-none md:flex-[40%] rounded-xl p-6 border-l-4 border-l-secondary-fixed-dim"
         style={{
           background: "rgba(255, 255, 255, 0.03)",
           backdropFilter: "blur(12px)",
@@ -39,9 +39,8 @@ export default function RcaNarrativeDark() {
         </ul>
       </div>
 
-      {/* Recommended Action */}
       <div
-        className="glass-panel flex-[25%] rounded-xl p-6 bg-error-container/10 border border-error/30 flex flex-col justify-center"
+        className="glass-panel flex-none md:flex-[25%] rounded-xl p-6 bg-error-container/10 border border-error/30 flex flex-col justify-center"
         style={{
           background: "rgba(255, 255, 255, 0.03)",
           backdropFilter: "blur(12px)",
@@ -69,7 +68,7 @@ export default function RcaNarrativeDark() {
 
       {/* Simulation Lab */}
       <div
-        className="glass-panel flex-[35%] rounded-xl p-6"
+        className="glass-panel flex-none md:flex-[35%] rounded-xl p-6"
         style={{
           background: "rgba(255, 255, 255, 0.03)",
           backdropFilter: "blur(12px)",

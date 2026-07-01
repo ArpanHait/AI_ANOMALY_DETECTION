@@ -2,7 +2,7 @@ import React from "react";
 
 export default function OverviewGaugesDark() {
   return (
-    <div className="flex gap-1 h-[25%]">
+    <div className="flex flex-col sm:flex-row gap-1 h-auto md:h-[25%]">
       <div
         className="glass-panel flex-1 rounded-xl p-6 flex flex-col items-center justify-center relative bg-glow-cyan overflow-hidden"
         style={{
