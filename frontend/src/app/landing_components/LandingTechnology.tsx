@@ -15,7 +15,7 @@ export default function LandingTechnology() {
             Engineered for High-Stakes Telemetry.
           </h2>
           <p className="text-on-surface-variant mb-6 font-body leading-relaxed">
-            ARES-1 processes multivariate time-series data at sub-millisecond
+            CoreInsight processes multivariate time-series data at sub-millisecond
             speeds. Our backend leverages optimized Autoencoders and LSTM neural
             networks that reconstruct normal operations and flag any deviations
             instantly.
@@ -48,7 +48,7 @@ export default function LandingTechnology() {
                   Autoencoder Reconstruction Index
                 </h4>
                 <p className="text-sm text-on-surface-variant">
-                  Instead of simple threshold checks, ARES-1 models system
+                  Instead of simple threshold checks, CoreInsight models system
                   co-movement to isolate the true origin of micro-anomalies.
                 </p>
               </div>
@@ -78,7 +78,7 @@ export default function LandingTechnology() {
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
                 <span className="font-mono text-xs text-on-surface-variant uppercase tracking-wider">
-                  ARES-1 Pipeline Status: Warm
+                  CoreInsight Pipeline Status: Warm
                 </span>
               </div>
               <span className="font-mono text-[10px] text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded">

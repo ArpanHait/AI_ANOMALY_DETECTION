@@ -15,7 +15,7 @@ export default function LandingCaseStudies() {
             Success Stories in Failure Prevention.
           </h2>
           <p className="text-on-surface-variant max-w-2xl mx-auto font-body">
-            See how ARES-1 prevented catastrophic breakdowns and optimized uptime
+            See how CoreInsight prevented catastrophic breakdowns and optimized uptime
             across heavy industrial deployments.
           </p>
         </div>

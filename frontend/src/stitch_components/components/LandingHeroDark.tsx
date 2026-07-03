@@ -15,13 +15,13 @@ export default function LandingHeroDark() {
               Predict Failures Before They <span className="text-primary">Happen.</span>
             </h1>
             <p className="text-lg md:text-xl text-on-surface-variant mb-10 max-w-xl font-body">
-              ARES-1 leverages deep neural networks to process industrial telemetry
+              CoreInsight leverages deep neural networks to process industrial telemetry
               in real-time, detecting micro-anomalies and preventing unplanned
               downtime before it impacts your bottom line.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="primary-button px-8 py-4 rounded-lg font-bold text-base flex items-center justify-center gap-2">
-                Deploy ARES-1
+                Deploy CoreInsight
                 <span className="material-symbols-outlined text-sm">
                   arrow_forward
                 </span>

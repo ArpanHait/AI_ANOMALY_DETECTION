@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ ARES-1 AI Anomaly Detection System
+# ⚡ CoreInsight AI Anomaly Detection System
 
 **A cyber-industrial predictive maintenance platform combining real-time ML inference with a full-stack operator dashboard.**
 
@@ -11,7 +11,7 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.0-F7931E?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-[Live Demo](#deployment) · [Tech Stack](#tech-stack) · [Setup](#getting-started)
+[⚡👉 Live Demo](https://coreinsight.vercel.app)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 ## 📖 Overview
 
-ARES-1 is a production-style **predictive maintenance and anomaly detection system** for industrial machinery. It ingests multivariate sensor telemetry (vibration, temperature, pressure, flow, current) and runs two ML models in real time to:
+CoreInsight is a production-style **predictive maintenance and anomaly detection system** for industrial machinery. It ingests multivariate sensor telemetry (vibration, temperature, pressure, flow, current) and runs two ML models in real time to:
 
 - **Detect anomalies** using an Isolation Forest scorer
 - **Predict near-term failure probability** using a Random Forest Classifier
@@ -31,7 +31,13 @@ All outputs are rendered in a high-fidelity cyber-industrial **Next.js dashboard
 
 ---
 
-## ✨ Features
+## 🖥️ Screenshots
+
+### 🏠 Landing Page
+![CoreInsight Landing Page](IMAGES/preview.png)
+
+### 📊 Overview
+![Live Telemetry Screen](IMAGES/LIVE_Preview.png)
 
 ### 🧠 AI / ML Engine
 - **Isolation Forest** anomaly detector trained on 8,000 steps of synthetic industrial sensor data
@@ -64,7 +70,7 @@ All outputs are rendered in a high-fidelity cyber-industrial **Next.js dashboard
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│                        ARES-1 System                           │
+│                      CoreInsight System                        │
 │                                                                │
 │  ┌─────────────────────┐      ┌─────────────────────────────┐  │
 │  │  Next.js Frontend   │      │      FastAPI Backend        │  │
@@ -257,13 +263,6 @@ TA_TRAINING_ROWS=8000
 TA_SIMULATION_SEED=42
 TA_ANOMALY_CONTAMINATION=0.05
 ```
-
-**Start the backend server:**
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
-
 > The server automatically trains both ML models on startup before accepting requests.
 
 **Interactive API docs available at:**
@@ -353,15 +352,18 @@ Weights: w_f = 0.46, w_a = 0.34, w_r = 0.20
 
 ## 📄 License
 
-This project is licensed under a custom **Attribution-NonCommercial License** (ARES-1). You are permitted to fork, modify, and run this project for personal and educational display purposes. However, you must maintain original authorship attribution (crediting Arpan Hait), and you may not use it or any derivative works for commercial purposes.
+This project is licensed under a custom **Attribution-NonCommercial License** (CoreInsight). You are permitted to fork, modify, and run this project for personal and educational display purposes. However, you must maintain original authorship attribution (crediting Arpan Hait & Md Saad Bin Kabir), and you may not use it or any derivative works for commercial purposes.
 
 See the [LICENSE](LICENSE) file for the full terms.
 
 ---
 <div align="center">
 
-**Built with ⚡ by Arpan Hait**
+### ⚡ CoreInsight System Developers
 
-[![GitHub](https://img.shields.io/badge/GitHub-ArpanHait-181717?style=for-the-badge&logo=github)](https://github.com/ArpanHait/AI_ANOMALY_DETECTION)
+| Frontend Developer | Backend Developer |
+| :---: | :---: |
+| **Arpan Hait** | **Md Saad Bin Kabir** |
+| [![GitHub](https://img.shields.io/badge/GitHub-ArpanHait-181717?style=for-the-badge&logo=github)](https://github.com/ArpanHait) | [![GitHub](https://img.shields.io/badge/GitHub-Pmskabir1234-181717?style=for-the-badge&logo=github)](https://github.com/Pmskabir1234) |
 
 </div>

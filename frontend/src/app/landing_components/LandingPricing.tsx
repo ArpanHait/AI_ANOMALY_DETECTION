@@ -17,7 +17,7 @@ export default function LandingPricing() {
             Simple, Transparent Pricing Plans.
           </h2>
           <p className="text-on-surface-variant max-w-2xl mx-auto font-body">
-            Deploy ARES-1 on-premise or in the cloud. Select a plan to scale uptime
+            Deploy CoreInsight on-premise or in the cloud. Select a plan to scale uptime
             across your operations.
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function LandingPricing() {
             Ready to eliminate unplanned downtime?
           </h2>
           <p className="text-lg text-on-surface-variant mb-10 font-body">
-            Join the industry leaders trusting ARES-1 to secure their operational
+            Join the industry leaders trusting CoreInsight to secure their operational
             continuity.
           </p>
           <button className="primary-button px-10 py-5 rounded-lg font-bold text-lg inline-flex items-center justify-center gap-3 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">

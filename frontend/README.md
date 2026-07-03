@@ -1,6 +1,6 @@
-# ARES-1 Frontend
+# CoreInsight Frontend
 
-This directory contains the Next.js frontend application for the **ARES-1 AI Anomaly Detection System**.
+This directory contains the Next.js frontend application for the **CoreInsight AI Anomaly Detection System**.
 
 For the complete project overview, system architecture details, tech stack description, API endpoints, and full setup/run instructions for both backend and frontend, please refer to the main [README.md](../README.md) file at the root of the repository.
 

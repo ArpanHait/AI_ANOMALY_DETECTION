@@ -25,7 +25,7 @@ export default function LandingHero() {
               Predict Failures Before They <span className="text-secondary">Happen.</span>
             </h1>
             <p className="text-lg md:text-xl text-on-surface-variant mb-10 max-w-xl font-body">
-              ARES-1 leverages deep neural networks to process industrial telemetry
+              CoreInsight leverages deep neural networks to process industrial telemetry
               in real-time, detecting micro-anomalies and preventing unplanned
               downtime before it impacts your bottom line.
             </p>
@@ -34,7 +34,7 @@ export default function LandingHero() {
                 href="/dashboard"
                 className="primary-button px-8 py-4 rounded-lg font-bold text-base flex items-center justify-center gap-2"
               >
-                Deploy ARES-1
+                Deploy CoreInsight
                 <span className="material-symbols-outlined text-sm">
                   arrow_forward
                 </span>
