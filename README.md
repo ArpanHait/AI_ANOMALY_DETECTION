@@ -11,7 +11,7 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.0-F7931E?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-[⚡👉 Live Demo](https://coreinsight.vercel.app)
+[⚡👉 Live Demo](https://coreinsight-nine.vercel.app/)
 
 </div>
 
