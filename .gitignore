@@ -12,3 +12,4 @@ logs/
 db.sqlite3
 venv
 walkthrough_mobile.md
+walkthrough.md
